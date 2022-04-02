@@ -3,14 +3,14 @@ import wpilib.drive
 
 MODULE_ID = 0
 
-class MyRobot(wpilib.TimedRobot):
+class Pneumatics(wpilib.TimedRobot):
     def robotInit(self):
-	self.compressor = wpilib.Compressor(MODULE_ID, wpilib.PneumaticsModuleType.CTREPCM)
+        self.compressor = wpilib.Compressor(MODULE_ID, wpilib.PneumaticsModuleType.CTREPCM)
         self.solenoid = wpilib.DoubleSolenoid(MODULE_ID, wpilib.PneumaticsModuleType.CTREPCM, 1, 2)
         self.stick = wpilib.Joystick(0)
     
     def teleopInit(self):
-	self.compressor.stop()
+	    self.compressor.stop()
 
     def teleopPeriodic(self):
         if self.stick.getRawButton(1) == True:
@@ -18,9 +18,9 @@ class MyRobot(wpilib.TimedRobot):
         else:
             self.compressor.stop()
 
-        #caso queria com toggle (se estiver off, acontece nada / se estiver desativado, ativa e vice-versa)
+        # Caso queria com toggle (se estiver off, acontece nada / se estiver desativado, ativa e vice-versa)
         #if self.stick.getRawButton(2) == True:
-	#	self.solenoid.toggle()
+	    #	self.solenoid.toggle()
 		
         if self.stick.getRawButton(2) == True:
             self.solenoid.set(wpilib.DoubleSolenoid.Value.kOff)
@@ -30,4 +30,4 @@ class MyRobot(wpilib.TimedRobot):
             self.solenoid.set(wpilib.DoubleSolenoid.Value.kReverse)
 		
 if __name__ == "__main__":
-    wpilib.run(MyRobot)
+    wpilib.run(Pneumatics)

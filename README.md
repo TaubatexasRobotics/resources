@@ -35,7 +35,7 @@ cd 'name_subsystem'
 python3 robot.py deploy
 ```
 ## Using Robot Simulator (Reminder highlighted in red)
-### Don't forget to enable a robot state!<br>
+### Do not forget to enable a robot state!<br>
 ![robot_state](https://user-images.githubusercontent.com/73722088/161405945-4b1c07eb-d35c-4ab3-ae5f-e23df67c188e.png)
 ## Credits
 All the commands are from RobotPy (Python 3 to the FRC).<br>

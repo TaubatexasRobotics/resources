@@ -11,7 +11,7 @@ C_VALUE_DEACTIVATE = 0.2
 C_BUFFER_ACTIVATE = 1
 C_BUFFER_DEACTIVATE = 1
 
-class SimpleMotorController(wpilib.TimedRobot):
+class SingleMotorController(wpilib.TimedRobot):
     def robotInit(self):
         self.m_controller = ctre.WPI_VictorSPX(C_ID)
 
@@ -30,4 +30,4 @@ class SimpleMotorController(wpilib.TimedRobot):
             self.m_controller.set(0)
 
 if __name__ == "__main__":
-    wpilib.run(SimpleMotorController)
+    wpilib.run(SingleMotorController)

@@ -3,11 +3,12 @@
 This repository contains files separated by category. The file will depend on the type of test the team would like to perform on the robot.
 <br>**All files have been written using <a href="https://robotpy.readthedocs.io/projects/wpilib/en/latest/wpilib/TimedRobot.html">TimedRobot</a> class**.
 ## Avaliable Teleoperated Tests
-- Pneumatics
-- Drivetrain (Arcade Drive with CTRE Victor SPX)
-- Single Motor Controller (CTRE Victor SPX)
+- Pneumatics;
+- Drivetrain (Arcade Drive with CTRE Victor SPX);
+- Single Motor Controller (CTRE Victor SPX).
 ## Others Tests
-- Physics (Only for Robot Simulator)
+- Physics (Only for Robot Simulator);
+- Serial UART (Communication between Arduino and RoboRIO).
 ## Deploy
 For more information, <a href="https://robotpy.readthedocs.io/en/stable/guide/deploy.html">click here.</a><br>
 Replace 'name_test' to folder that you would like to access.

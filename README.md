@@ -1,7 +1,7 @@
 # Resources and test files/modules
 
 This repository contains files separated by category. The file will depend on the type of test the team would like to perform on the robot.
-<br>**All files have been written using <a href="https://robotpy.readthedocs.io/projects/wpilib/en/latest/wpilib/TimedRobot.html">TimedRobot</a> class**.
+<br>**All files were written using <a href="https://robotpy.readthedocs.io/projects/wpilib/en/latest/wpilib/TimedRobot.html">TimedRobot</a> class**.
 ## Avaliable Teleoperated Tests
 - Pneumatics;
 - Drivetrain (Arcade Drive with CTRE Victor SPX);

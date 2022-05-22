@@ -37,7 +37,7 @@ python3 robot.py deploy
 ```
 ## Using Robot Simulator (Reminder highlighted in red)
 ### Do not forget to enable a robot state!<br>
-![robot_state](https://user-images.githubusercontent.com/73722088/161405945-4b1c07eb-d35c-4ab3-ae5f-e23df67c188e.png)
+![Screenshot 2022-05-22 004139](https://user-images.githubusercontent.com/73722088/169677573-44665203-6c40-4d09-a6f8-7b2e23cbed30.png)
 ## Credits
 All the commands are from RobotPy (Python 3 to the FRC).<br>
 **<a href="https://robotpy.readthedocs.io/en/stable/index.html">Click here to open documentation</a>**

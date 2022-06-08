@@ -18,7 +18,7 @@ After cloning the repository, you must have <a href="https://www.python.org/down
 ```
 pip install -r requirements.txt
 ```
-## Deploy
+## Testing code
 For more information, <a href="https://robotpy.readthedocs.io/en/stable/guide/deploy.html">click here.</a><br>
 Replace 'name_test' to folder that you would like to access.
 ### Windows

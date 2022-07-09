@@ -49,5 +49,11 @@ g_xbox_360 = {
     'pov-up' : 0,
     'pov-down' : 180,
     'pov-left' : 270,
-    'pov-right' : 90
+    'pov-right' : 90,
+    'left-x-stick' : 0,
+    'left-y-stick' : 1,
+    'lt' : 2,
+    'rt' : 3,
+    'right-x-stick' : 4
+    'right-y-stick' : 5
 }

@@ -54,6 +54,6 @@ g_xbox_360 = {
     'left-y-stick' : 1,
     'lt' : 2,
     'rt' : 3,
-    'right-x-stick' : 4
+    'right-x-stick' : 4,
     'right-y-stick' : 5
 }

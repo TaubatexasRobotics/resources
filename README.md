@@ -5,7 +5,7 @@ This repository contains files separated by category. The file will depend on th
 ## Tests
 - Pneumatics;
 - Drivetrain;
-- Single Motor Controller.
+- Single Motor Controller;
 - Physics (Only for Robot Simulator);
 - Serial UART (Communication between Arduino and RoboRIO).
 ## Setup & Installation

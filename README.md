@@ -44,5 +44,5 @@ python3 robot.py deploy
 Please check out the <a href="https://github.com/robotpy/examples/blob/main/CONTRIBUTING.md">RobotPy's porting guide</a> for a variety of guidelines for new examples.
 
 ## Credits
-All the commands are from RobotPy (Python 3 to the FRC).<br>
+All the commands are from RobotPy (Python 3 for the FRC).<br>
 **<a href="https://robotpy.readthedocs.io/en/stable/index.html">Click here to open documentation</a>**

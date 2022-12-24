@@ -3,7 +3,7 @@
 This repository contains files separated by category. The file will depend on the type of test the team would like to perform on the robot.
 <br>**All files were written using <a href="https://robotpy.readthedocs.io/projects/wpilib/en/latest/wpilib/TimedRobot.html">TimedRobot</a> class**.
 ## Setup & Installation
-For more information about installing RobotPy's packages, <a href="https://robotpy.readthedocs.io/en/stable/install/index.html">click here.</a><br>
+For more information about the setup of RobotPy's packages, <a href="https://robotpy.readthedocs.io/en/stable/install/index.html">click here.</a><br>
 ### Prerequisites
 After cloning the repository, you must have <a href="https://www.python.org/downloads/">Python 3</a> and <a href="https://pypi.org/project/pip/">pip</a> installed on your computer.
 ### Installing packages

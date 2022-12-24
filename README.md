@@ -2,12 +2,6 @@
 
 This repository contains files separated by category. The file will depend on the type of test the team would like to perform on the robot.
 <br>**All files were written using <a href="https://robotpy.readthedocs.io/projects/wpilib/en/latest/wpilib/TimedRobot.html">TimedRobot</a> class**.
-## Tests
-- Pneumatics;
-- Drivetrain;
-- Single Motor Controller;
-- Physics (Only for Robot Simulator);
-- Serial UART (Communication between Arduino and RoboRIO).
 ## Setup & Installation
 For more information about installing RobotPy's packages, <a href="https://robotpy.readthedocs.io/en/stable/install/index.html">click here.</a><br>
 ### Prerequisites
@@ -48,3 +42,7 @@ python3 robot.py deploy
 ## Credits
 All the commands are from RobotPy (Python 3 to the FRC).<br>
 **<a href="https://robotpy.readthedocs.io/en/stable/index.html">Click here to open documentation</a>**
+
+## Contributions
+
+Please check out the <a href="https://github.com/robotpy/examples/blob/main/CONTRIBUTING.md">RobotPy's porting guide</a> for a variety of guidelines for new examples.

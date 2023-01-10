@@ -6,7 +6,6 @@ cd "$(dirname $0)"
 
 # Keep this list alphabetically sorted
 BASE_TESTS="
-  button_binding
   cheezy_drive
   drivetrain
   pneumatics

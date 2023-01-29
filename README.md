@@ -1,7 +1,6 @@
 # Resources and test files/modules
 
 This repository contains files separated by category. The file will depend on the type of test the team would like to perform on the robot.
-<br>**All files were written using <a href="https://robotpy.readthedocs.io/projects/wpilib/en/latest/wpilib/TimedRobot.html">TimedRobot</a> class**.
 ## Setup & Installation
 For more information about the setup of RobotPy's packages, <a href="https://robotpy.readthedocs.io/en/stable/install/index.html">click here.</a><br>
 ### Prerequisites

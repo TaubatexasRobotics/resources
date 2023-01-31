@@ -36,6 +36,8 @@ class Drivetrain(wpilib.TimedRobot):
 
         # joystick 0
         self.stick = wpilib.Joystick(0)
+        
+        self.m_right.setInverted(True)
 
     def teleopInit(self):
         self.drivetrain.setSafetyEnabled(True)

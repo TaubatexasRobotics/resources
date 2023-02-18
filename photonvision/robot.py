@@ -22,12 +22,9 @@ class PhotonVisionTest(wpilib.TimedRobot):
         )
 
     def robotPeriodic(self) -> None:
-        self.result = self.camera.getLatestResult()
-        
-        if self.result.hasTargets():
-            print('it worked!')
-        else:
-            print('it did not work')
+        self.distanceToTarget = photonvision.PhotonUtils.getDistanceToPose(
+            
+        )
 
     def teleopInit(self) -> None:
         # Calculating Distance to Target

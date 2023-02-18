@@ -1,9 +1,7 @@
-
 import wpilib
 import wpilib.drive
 import ctre
 import rev
-from navx import AHRS
 
 class MyRobot(wpilib.TimedRobot):
     

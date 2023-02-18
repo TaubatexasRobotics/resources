@@ -1,45 +1,33 @@
 import wpilib
 import photonvision
-import wpimath
+import constants
 import wpimath.controller
+import wpilib.drive
+import ctre
 
-# Generic Values
-CAMERA_HEIGHT_METERS = 1
-TARGET_HEIGHT_METERS = 1
-CAMERA_PITCH_RADIANS = 1
-GOAL_RANGE_METERS = 2
-
-kP = 0.1
-kI = 0.2
-kD = 0.3
-
-class PhotonVisionTest(wpilib.TimedRobot):
-    def robotInit(self) -> None:
-        self.camera = photonvision.PhotonCamera('Microsoft_LifeCam_HD-3000')
-        self.joystick = wpilib.Joystick(0)
+class myRobot(wpilib.TimedRobot):
+    def robotInit(self):
+        self.photoCamera = photonvision.PhotonCamera('Teste')
         self.controller = wpimath.controller.PIDController(
-            0.1, 0.2, 0.3
+            constants.kP, constants.kI, constants.kD
+        )
+        self.drive = wpilib.drive.DifferentialDrive(
+            wpilib.MotorControllerGroup(ctre.WPI_VictorSPX(0), ctre.WPI_VictorSPX(1)),
+            wpilib.MotorControllerGroup(ctre.WPI_VictorSPX(2), ctre.WPI_VictorSPX(3)),
         )
 
-    def robotPeriodic(self) -> None:
-        self.distanceToTarget = photonvision.PhotonUtils.getDistanceToPose(
-            
-        )
-
-    def teleopInit(self) -> None:
-        # Calculating Distance to Target
-        if self.joystick.getRawButton(0):
-            result = self.camera.getLatestResult()
-
-            if result.hasTargets():
-                r = photonvision.PhotonUtils.calculateDistanceToTargetMeters(
-                    CAMERA_HEIGHT_METERS,
-                    TARGET_HEIGHT_METERS,
-                    CAMERA_PITCH_RADIANS,
-                    wpimath.units.degreesToRadians(result.getBestTarget().getPitch())
-                )
-            
-            forward = self.controller.calculate(r, GOAL_RANGE_METERS)
+    def robotPeriodic(self):
+        result = self.photoCamera.getLatestResult()
+        if (result.hasTargets()):
+            print('achei')
+            rangeTarget = photonvision.PhotonUtils.calculateDistanceToTargetMeters(
+                constants.CAMERA_HEIGHT_METERS,
+                constants.TARGET_HEIGHT_METERS,
+                constants.CAMERA_PITCH_RADIANS,
+                wpimath.Units.degreesToRadians(result.getBestTarget().getPitch())
+            )
+            forwardSpeed = self.controller.calculate(rangeTarget, constants.GOAL_RANGE_METERS)
+            self.drive.arcadeDrive(forwardSpeed, 0, True)
 
 if __name__ == '__main__':
-    wpilib.run(PhotonVisionTest)
+    wpilib.run(myRobot)

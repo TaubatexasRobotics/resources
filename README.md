@@ -1,6 +1,6 @@
 # Resources and test files/modules
 
-This repository contains files separated by category. The file will depend on the type of test the team would like to perform on the robot.
+This repository contains files separated by category. The file will depend on the type of test you would like to perform on the robot.
 ## Setup & Installation
 For more information about the setup of RobotPy's packages, <a href="https://robotpy.readthedocs.io/en/stable/install/index.html">click here.</a><br>
 ### Prerequisites
@@ -11,28 +11,23 @@ pip install -r requirements.txt
 ```
 ## Testing code
 For more information, <a href="https://robotpy.readthedocs.io/en/stable/guide/deploy.html">click here.</a><br>
-Replace 'name_test' to folder that you would like to access.
 ### Windows
 - Executing Robot Simulator
 ```
-cd 'name_test'
 py -3 robot.py sim
 ```
 - Deploy to the robot
 ```
-cd 'name_test'
 py -3 robot.py deploy
 ```
 ---
 ### Linux/macOS
 - Executing Robot Simulator
 ```
-cd 'name_test'
 python3 robot.py sim
 ```
 - Deploy to the robot
 ```
-cd 'name_test'
 python3 robot.py deploy
 ```
 ## Using Robot Simulator (Reminder highlighted in red)

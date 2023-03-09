@@ -37,8 +37,8 @@ class MyRobot(wpilib.TimedRobot):
         
         rotation2D = wpimath.geometry._geometry.Rotation2d(self.navx.getAngle())
 
-        self.odometry.update(rotation2D,2,2)
-        # print(self.odometry.getPose())
+        self.odometry.update(rotation2D,3,3)
+        print(self.odometry.getPose())
         # print(yaw)
         print(f"Position: {position} revolutions")
         # print(f"Velocity: {velocity} RPM")

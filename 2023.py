@@ -5,15 +5,42 @@ import rev
 
 MODULE_ID = 0
 
+C_LEFT_BACK = 1
+C_LEFT_FRONT = 2
+C_RIGHT_FRONT = 3
+C_RIGHT_BACK = 4
+#Angle limit
+LIMIT_ANGLE_FORWARD = 0.5
+LIMIT_ANGLE_BACKWARD = 0.5
+#Lenght limit
+LIMIT_LENGHT_FORWARD = 0.5
+LIMIT_LENGHT_BACKWARD = 0.5
+
+
 class MyRobot(wpilib.TimedRobot):
 
     def robotInit(self):
+        self.m_left_back = ctre.WPI_VictorSPX(C_LEFT_BACK)
+        self.m_left_front = ctre.WPI_VictorSPX(C_LEFT_FRONT)
+        self.m_right_front = ctre.WPI_VictorSPX(C_RIGHT_FRONT)
+        self.m_right_back = ctre.WPI_VictorSPX(C_RIGHT_BACK)
 
+        self.m_arm_angle = rev.CANSparkMax(1, rev.CANSparkMaxLowLevel.MotorType.kBrushless)
+        self.m_arm_lenght = rev.CANSparkMax(2,  rev.CANSparkMaxLowLevel.MotorType.kBrushless)
+
+        self.m_arm_angle_pid = self.m_arm_angle.getPIDController()
+        self.m_arm_lenght_pid = self.m_arm_angle.getPIDController()
+        self.m_arm_angle_pid.setReference(0,rev.CANSparkMax.ControlType.kPosition)
+        self.m_arm_lenght_pid.setReference(0,rev.CANSparkMax.ControlType.kPosition)
         
-        self.m_left_front = rev.CANSparkMax(1, rev.CANSparkMaxLowLevel.MotorType.kBrushless) 
-        self.m_left_back = rev.CANSparkMax(2,  rev.CANSparkMaxLowLevel.MotorType.kBrushless) 
-        self.m_right_front = rev.CANSparkMax(3, rev.CANSparkMaxLowLevel.MotorType.kBrushless) 
-        self.m_right_back = rev.CANSparkMax(4,  rev.CANSparkMaxLowLevel.MotorType.kBrushless)  
+        #set limit
+        self.m_arm_angle.setSoftLimit(rev.CANSparkMax.SoftLimitDirection.kForward, LIMIT_ANGLE_FORWARD)
+        self.m_arm_angle.setSoftLimit(rev.CANSparkMax.SoftLimitDirection.kReverse, LIMIT_ANGLE_BACKWARD)
+        self.m_arm_lenght.setSoftLimit(rev.CANSparkMax.SoftLimitDirection.kForward, LIMIT_LENGHT_FORWARD)
+        self.m_arm_lenght.setSoftLimit(rev.CANSparkMax.SoftLimitDirection.kReverse, LIMIT_LENGHT_BACKWARD)
+
+        # self.m_right_front = rev.CANSparkMax(3, rev.CANSparkMaxLowLevel.MotorType.kBrushless) 
+        # self.m_right_back = rev.CANSparkMax(4,  rev.CANSparkMaxLowLevel.MotorType.kBrushless)  
 
         self.m_left= wpilib.MotorControllerGroup(self.m_left_front,self.m_left_back)   
         self.m_right= wpilib.MotorControllerGroup(self.m_right_front,self.m_right_back) 
@@ -24,6 +51,8 @@ class MyRobot(wpilib.TimedRobot):
         self.compressor = wpilib.Compressor(MODULE_ID, wpilib.PneumaticsModuleType.CTREPCM)
         self.solenoid = wpilib.DoubleSolenoid(MODULE_ID, wpilib.PneumaticsModuleType.CTREPCM, 1, 2)
         self.stick = wpilib.Joystick(0)
+        # reset encoder
+
 
 
     def teleopInit(self):

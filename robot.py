@@ -11,7 +11,7 @@ C_RIGHT_FRONT = 3
 C_RIGHT_BACK = 4
 #Angle limit
 LIMIT_ANGLE_FORWARD = 0
-LIMIT_ANGLE_BACKWARD = 21,7
+LIMIT_ANGLE_BACKWARD = 21.7
 #Lenght limit
 LIMIT_LENGHT_FORWARD = 4.97
 LIMIT_LENGHT_BACKWARD = 0
@@ -47,8 +47,8 @@ class MyRobot(wpilib.TimedRobot):
         self.m_arm_angle = rev.CANSparkMax(1, rev.CANSparkMaxLowLevel.MotorType.kBrushless)
         self.m_arm_lenght = rev.CANSparkMax(2,  rev.CANSparkMaxLowLevel.MotorType.kBrushless)
 
-        self.m_arm_angle_encoder = m_arm_angle.getEncoder()
-        self.m_arm_lenght_encoder = m_arm_lenght.getEncoder()
+        self.m_arm_angle_encoder = self.m_arm_angle.getEncoder()
+        self.m_arm_lenght_encoder = self.m_arm_lenght.getEncoder()
 
         #set pid constants
         self.m_arm_angle_pid = self.m_arm_angle.getPIDController()
@@ -56,7 +56,7 @@ class MyRobot(wpilib.TimedRobot):
         self.m_arm_angle_pid.setI(ARM_ANGLE["KI"])
         self.m_arm_angle_pid.setD(ARM_ANGLE["KD"])
 
-        self.m_arm_lenght_pid = self.m_arm_angle.getPIDController()
+        self.m_arm_lenght_pid = self.m_arm_lenght.getPIDController()
         self.m_arm_lenght_pid.setP(ARM_LENGHT["KP"])
         self.m_arm_lenght_pid.setI(ARM_LENGHT["KI"])
         self.m_arm_lenght_pid.setD(ARM_LENGHT["KD"])
@@ -64,10 +64,10 @@ class MyRobot(wpilib.TimedRobot):
         self.m_arm_angle_pid.setReference(0,rev.CANSparkMax.ControlType.kPosition)
         self.m_arm_lenght_pid.setReference(0,rev.CANSparkMax.ControlType.kPosition)
         #set limit
-        self.m_arm_angle.setSoftLimit(rev.CANSparkMax.SoftLimitDirection.kForward, LIMIT_ANGLE_FORWARD)
-        self.m_arm_angle.setSoftLimit(rev.CANSparkMax.SoftLimitDirection.kReverse, LIMIT_ANGLE_BACKWARD)
-        self.m_arm_lenght.setSoftLimit(rev.CANSparkMax.SoftLimitDirection.kForward, LIMIT_LENGHT_FORWARD)
-        self.m_arm_lenght.setSoftLimit(rev.CANSparkMax.SoftLimitDirection.kReverse, LIMIT_LENGHT_BACKWARD)
+        # # self.m_arm_angle.setSoftLimit(rev.CANSparkMax.SoftLimitDirection.kForward, LIMIT_ANGLE_FORWARD)
+        # self.m_arm_angle.setSoftLimit(rev.CANSparkMax.SoftLimitDirection.kReverse, LIMIT_ANGLE_BACKWARD)
+        # self.m_arm_lenght.setSoftLimit(rev.CANSparkMax.SoftLimitDirection.kForward, LIMIT_LENGHT_FORWARD)
+        # self.m_arm_lenght.setSoftLimit(rev.CANSparkMax.SoftLimitDirection.kReverse, LIMIT_LENGHT_BACKWARD)
       
         #pneumática
         self.p = wpilib.PneumaticsControlModule()
@@ -109,17 +109,21 @@ class MyRobot(wpilib.TimedRobot):
         if self.stick.getRawButton(4) == True:
             self.solenoid.set(wpilib.DoubleSolenoid.Value.kReverse)
 
-        if self.stick.getRawButton(5) == True:
-            self.m_arm_angle_pid.setReference(10,rev.CANSparkMax.ControlType.kPosition)
+        if self.stick.getRawButtonPressed(5) == True:
+            angle_position = self.m_arm_angle_encoder.getPosition()
+            self.m_arm_angle_pid.setReference(angle_position+1,rev.CANSparkMax.ControlType.kPosition)
         
-        if self.stick.getRawButton(6) == True:
-            self.m_arm_angle_pid.setReference(15,rev.CANSparkMax.ControlType.kPosition)
+        if self.stick.getRawButtonPressed(6) == True:
+            angle_position = self.m_arm_angle_encoder.getPosition()
+            self.m_arm_angle_pid.setReference(angle_position-1,rev.CANSparkMax.ControlType.kPosition)
 
-        if self.stick.getRawButton(7) == True:
-            self.m_arm_lenght_pid.setReference(-2,rev.CANSparkMax.ControlType.kPosition)
+        if self.stick.getRawButtonPressed(7) == True:
+            lenght_position = self.m_arm_lenght_encoder.getPosition()
+            self.m_arm_lenght_pid.setReference(lenght_position+0.5,rev.CANSparkMax.ControlType.kPosition)
 
-        if self.stick.getRawButton(8) == True:
-            self.m_arm_lenght_pid.setReference(-4,rev.CANSparkMax.ControlType.kPosition)
+        if self.stick.getRawButtonPressed(8) == True:
+            lenght_position = self.m_arm_lenght_encoder.getPosition()
+            self.m_arm_lenght_pid.setReference(lenght_position-0.5,rev.CANSparkMax.ControlType.kPosition)
 
             
 if __name__ == "__main__":

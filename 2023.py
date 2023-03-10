@@ -10,12 +10,26 @@ C_LEFT_FRONT = 2
 C_RIGHT_FRONT = 3
 C_RIGHT_BACK = 4
 #Angle limit
-LIMIT_ANGLE_FORWARD = 0.5
-LIMIT_ANGLE_BACKWARD = 0.5
+LIMIT_ANGLE_FORWARD = 0
+LIMIT_ANGLE_BACKWARD = 21,7
 #Lenght limit
 LIMIT_LENGHT_FORWARD = 4.97
 LIMIT_LENGHT_BACKWARD = 0
 
+ARM_ANGLE= {
+    "KP" : 0.1,
+    "KI" : 0.0,
+    "KD" : 0.1,   
+}
+
+ARM_LENGHT= {
+    "KP" : 0.1,
+    "KI" : 0.0,
+    "KD" : 0.1,   
+}
+
+SOLENOID_FORWARD_CHANNEL = 0
+SOLENOID_REVERSE_CHANNEL = 1
 
 class MyRobot(wpilib.TimedRobot):
 
@@ -34,7 +48,15 @@ class MyRobot(wpilib.TimedRobot):
         self.m_arm_lenght = rev.CANSparkMax(2,  rev.CANSparkMaxLowLevel.MotorType.kBrushless)
         #reset encoder
         self.m_arm_angle_pid = self.m_arm_angle.getPIDController()
+        self.m_arm_angle_pid.setP(ARM_ANGLE["KP"])
+        self.m_arm_angle_pid.setI(ARM_ANGLE["KI"])
+        self.m_arm_angle_pid.setD(ARM_ANGLE["KD"])
+
         self.m_arm_lenght_pid = self.m_arm_angle.getPIDController()
+        self.m_arm_lenght_pid.setP(ARM_LENGHT["KP"])
+        self.m_arm_lenght_pid.setI(ARM_LENGHT["KI"])
+        self.m_arm_lenght_pid.setD(ARM_LENGHT["KD"])
+
         self.m_arm_angle_pid.setReference(0,rev.CANSparkMax.ControlType.kPosition)
         self.m_arm_lenght_pid.setReference(0,rev.CANSparkMax.ControlType.kPosition)
         #set limit
@@ -46,7 +68,7 @@ class MyRobot(wpilib.TimedRobot):
         #pneumática
         self.p = wpilib.PneumaticsControlModule()
         self.compressor = wpilib.Compressor(MODULE_ID, wpilib.PneumaticsModuleType.CTREPCM)
-        self.solenoid = wpilib.DoubleSolenoid(MODULE_ID, wpilib.PneumaticsModuleType.CTREPCM, 1, 2)
+        self.solenoid = wpilib.DoubleSolenoid(MODULE_ID, wpilib.PneumaticsModuleType.CTREPCM, SOLENOID_FORWARD_CHANNEL, SOLENOID_REVERSE_CHANNEL)
         
         #joystick
         self.stick = wpilib.Joystick(0)

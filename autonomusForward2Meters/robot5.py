@@ -1,6 +1,6 @@
 import wpilib
-from wpilib import Encoder, ADXRS450_Gyro
-
+from wpilib import Encoder
+from navx import AHRS
 class MyRobot(wpilib.TimedRobot):
     def robotInit(self):
         # Initialize the drivetrain motors and encoders
@@ -19,7 +19,7 @@ class MyRobot(wpilib.TimedRobot):
         self.right_encoder.setReverseDirection(False)
         
         # Initialize the navX
-        self.navx = wpilib.ADXRS450_Gyro()
+        self.navx = AHRS.create_spi()
 
     def autonomousInit(self):
         # Reset the encoders and navX

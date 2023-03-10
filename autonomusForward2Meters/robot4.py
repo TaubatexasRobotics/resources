@@ -1,4 +1,5 @@
-import robotpy_ext.common_drivers.navx.ahrs as navx
+
+from navx import AHRS
 import wpilib
 from wpilib.interfaces import GenericHID
 from wpilib.drive import DifferentialDrive
@@ -12,7 +13,7 @@ class MyRobot(wpilib.TimedRobot):
         self.back_right_motor = wpilib.PWMVictorSPX(3)
         self.left_encoder = wpilib.Encoder(0, 1)
         self.right_encoder = wpilib.Encoder(2, 3)
-        self.navx = navx.AHRS.create_spi()
+        self.navx = AHRS.create_spi()
 
         self.robot_drive = DifferentialDrive(
             wpilib.SpeedControllerGroup(self.front_left_motor, self.back_left_motor),

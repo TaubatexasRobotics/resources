@@ -46,7 +46,11 @@ class MyRobot(wpilib.TimedRobot):
         #braço e intake
         self.m_arm_angle = rev.CANSparkMax(1, rev.CANSparkMaxLowLevel.MotorType.kBrushless)
         self.m_arm_lenght = rev.CANSparkMax(2,  rev.CANSparkMaxLowLevel.MotorType.kBrushless)
-        #reset encoder
+
+        self.m_arm_angle_encoder = m_arm_angle.getEncoder()
+        self.m_arm_lenght_encoder = m_arm_lenght.getEncoder()
+
+        #set pid constants
         self.m_arm_angle_pid = self.m_arm_angle.getPIDController()
         self.m_arm_angle_pid.setP(ARM_ANGLE["KP"])
         self.m_arm_angle_pid.setI(ARM_ANGLE["KI"])
@@ -86,6 +90,9 @@ class MyRobot(wpilib.TimedRobot):
             True
         )
 
+        # self.stick.getRawAxis(4)
+        # self.stick.getRawAxis(5)
+
         if self.stick.getRawButton(1) == True:
             self.compressor.enableDigital()
         else:
@@ -102,7 +109,18 @@ class MyRobot(wpilib.TimedRobot):
         if self.stick.getRawButton(4) == True:
             self.solenoid.set(wpilib.DoubleSolenoid.Value.kReverse)
 
-            #print("reverteu")
+        if self.stick.getRawButton(5) == True:
+            self.m_arm_angle_pid.setReference(10,rev.CANSparkMax.ControlType.kPosition)
+        
+        if self.stick.getRawButton(6) == True:
+            self.m_arm_angle_pid.setReference(15,rev.CANSparkMax.ControlType.kPosition)
+
+        if self.stick.getRawButton(7) == True:
+            self.m_arm_lenght_pid.setReference(-2,rev.CANSparkMax.ControlType.kPosition)
+
+        if self.stick.getRawButton(8) == True:
+            self.m_arm_lenght_pid.setReference(-4,rev.CANSparkMax.ControlType.kPosition)
+
             
 if __name__ == "__main__":
     wpilib.run(MyRobot)

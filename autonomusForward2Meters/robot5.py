@@ -1,13 +1,14 @@
 import wpilib
 from wpilib import Encoder
 from navx import AHRS
+import ctre
 class MyRobot(wpilib.TimedRobot):
     def robotInit(self):
         # Initialize the drivetrain motors and encoders
-        self.front_left_motor = wpilib.VictorSPX(0)
-        self.front_right_motor = wpilib.VictorSPX(1)
-        self.back_left_motor = wpilib.VictorSPX(2)
-        self.back_right_motor = wpilib.VictorSPX(3)
+        self.front_left_motor = ctre.VictorSPX(0)
+        self.front_right_motor = ctre.VictorSPX(1)
+        self.back_left_motor = ctre.VictorSPX(2)
+        self.back_right_motor = ctre.VictorSPX(3)
         
         self.left_encoder = wpilib.Encoder(0, 1)
         self.right_encoder = wpilib.Encoder(2, 3)

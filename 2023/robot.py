@@ -9,6 +9,10 @@ C_LEFT_BACK = 1
 C_LEFT_FRONT = 2
 C_RIGHT_FRONT = 3
 C_RIGHT_BACK = 4
+
+ARM_LENGHT_SPARK_ID = 50
+ARM_ANGLE_SPARK_ID = 51
+
 #Angle limit
 LIMIT_ANGLE_FORWARD = 0
 LIMIT_ANGLE_BACKWARD = 21.7
@@ -39,13 +43,14 @@ class MyRobot(wpilib.TimedRobot):
         self.m_left_front = ctre.WPI_VictorSPX(C_LEFT_FRONT)
         self.m_right_front = ctre.WPI_VictorSPX(C_RIGHT_FRONT)
         self.m_right_back = ctre.WPI_VictorSPX(C_RIGHT_BACK)
-        self.m_left= wpilib.MotorControllerGroup(self.m_left_front,self.m_left_back)   
+        self.m_left= wpilib.MotorControllerGroup(self.m_left_front,self.m_left_back) 
+        self.m_left.setInverted(True) 
         self.m_right= wpilib.MotorControllerGroup(self.m_right_front,self.m_right_back) 
         self.myRobot  = wpilib.drive.DifferentialDrive(self.m_left, self.m_right) 
 
         #braço e intake
-        self.m_arm_angle = rev.CANSparkMax(1, rev.CANSparkMaxLowLevel.MotorType.kBrushless)
-        self.m_arm_lenght = rev.CANSparkMax(2,  rev.CANSparkMaxLowLevel.MotorType.kBrushless)
+        self.m_arm_angle = rev.CANSparkMax(ARM_ANGLE_SPARK_ID, rev.CANSparkMaxLowLevel.MotorType.kBrushless)
+        self.m_arm_lenght = rev.CANSparkMax(ARM_LENGHT_SPARK_ID,  rev.CANSparkMaxLowLevel.MotorType.kBrushless)
 
         self.m_arm_angle_encoder = self.m_arm_angle.getEncoder()
         self.m_arm_lenght_encoder = self.m_arm_lenght.getEncoder()
@@ -61,8 +66,8 @@ class MyRobot(wpilib.TimedRobot):
         self.m_arm_lenght_pid.setI(ARM_LENGHT["KI"])
         self.m_arm_lenght_pid.setD(ARM_LENGHT["KD"])
 
-        self.m_arm_angle_pid.setReference(0,rev.CANSparkMax.ControlType.kPosition)
-        self.m_arm_lenght_pid.setReference(0,rev.CANSparkMax.ControlType.kPosition)
+        # self.m_arm_angle_pid.setReference(0,rev.CANSparkMax.ControlType.kPosition)
+        # self.m_arm_lenght_pid.setReference(0,rev.CANSparkMax.ControlType.kPosition)
         #set limit
         # # self.m_arm_angle.setSoftLimit(rev.CANSparkMax.SoftLimitDirection.kForward, LIMIT_ANGLE_FORWARD)
         # self.m_arm_angle.setSoftLimit(rev.CANSparkMax.SoftLimitDirection.kReverse, LIMIT_ANGLE_BACKWARD)
@@ -111,6 +116,7 @@ class MyRobot(wpilib.TimedRobot):
 
         if self.stick.getRawButtonPressed(5) == True:
             angle_position = self.m_arm_angle_encoder.getPosition()
+            print(angle_position)
             self.m_arm_angle_pid.setReference(angle_position+1,rev.CANSparkMax.ControlType.kPosition)
         
         if self.stick.getRawButtonPressed(6) == True:

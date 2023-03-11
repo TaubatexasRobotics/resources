@@ -75,3 +75,5 @@ class MyRobot(wpilib.TimedRobot):
 
         # Stop the robot when it has reached the target distance
         self.myRobot.arcadeDrive(0, 0)
+    def autonomousPeriodic(self):
+        pass

@@ -75,3 +75,7 @@ class MyRobot(wpilib.TimedRobot):
 
         # Disable the PID controller
         self.pid_controller.disable()
+    def autonomousPeriodic(self):
+        pass
+    def teleopPeriodic(self):
+        pass

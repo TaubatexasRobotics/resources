@@ -66,8 +66,6 @@ class MyRobot(wpilib.TimedRobot):
         self.m_arm_lenght_pid.setI(ARM_LENGHT["KI"])
         self.m_arm_lenght_pid.setD(ARM_LENGHT["KD"])
 
-        # self.m_arm_angle_pid.setReference(0,rev.CANSparkMax.ControlType.kPosition)
-        # self.m_arm_lenght_pid.setReference(0,rev.CANSparkMax.ControlType.kPosition)
         #set limit
         # # self.m_arm_angle.setSoftLimit(rev.CANSparkMax.SoftLimitDirection.kForward, LIMIT_ANGLE_FORWARD)
         # self.m_arm_angle.setSoftLimit(rev.CANSparkMax.SoftLimitDirection.kReverse, LIMIT_ANGLE_BACKWARD)
@@ -95,9 +93,6 @@ class MyRobot(wpilib.TimedRobot):
             True
         )
 
-        # self.stick.getRawAxis(4)
-        # self.stick.getRawAxis(5)
-
         if self.stick.getRawButton(1) == True:
             self.compressor.enableDigital()
         else:
@@ -105,12 +100,10 @@ class MyRobot(wpilib.TimedRobot):
 
         if self.stick.getRawButton(2) == True:
             self.solenoid.set(wpilib.DoubleSolenoid.Value.kOff)
-            #print("kOff")
-
+            
         if self.stick.getRawButton(3) == True:
             self.solenoid.set(wpilib.DoubleSolenoid.Value.kForward)
-            #print("kForward")
-        
+                    
         if self.stick.getRawButton(4) == True:
             self.solenoid.set(wpilib.DoubleSolenoid.Value.kReverse)
 

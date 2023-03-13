@@ -10,7 +10,8 @@ chooser.addOption('option2', '2')
 class MyRobot(wpilib.TimedRobot):
     def robotInit(self):        
         self.sd = Shuffleboard.getTab("My Tab")
-        wpilib.SmartDashboard.putData('Choice', chooser)
+        my_tab = Shuffleboard.getTab("My Tab")
+        my_tab.add('choose', chooser)
     
     def robotPeriodic(self):
         value = chooser.getSelected()

@@ -32,6 +32,9 @@ class MyRobot(wpilib.TimedRobot):
         #joystick
         self.stick = wpilib.Joystick(0)
 
+        #variáveis de estado
+        self.solenoidActived = False
+
     def teleopInit(self):
 
         self.myRobot.setSafetyEnabled(True)
@@ -39,39 +42,40 @@ class MyRobot(wpilib.TimedRobot):
 
     def teleopPeriodic(self):
 
-        #tração
         self.myRobot.arcadeDrive(
             self.stick.getRawAxis(1),
             self.stick.getRawAxis(0)*1.15,
             True
         )
 
-        if self.stick.getRawButton(8) == True:
+        if self.stick.getRawButton(constants.XBOX_START_BUTTON) == True:
             self.compressor.enableDigital()
         else:
             self.compressor.disable()
 
-        if self.stick.getRawButton(5) == True:
-            self.solenoid.set(wpilib.DoubleSolenoid.Value.kForward)  
-
-        if self.stick.getRawButtonPressed(6) == True:
-            self.solenoid.set(wpilib.DoubleSolenoid.Value.kReverse)
-        
-        if self.stick.getRawButtonPressed(1) == True:
-            self.m_arm_angle.set(0.05)
-
-        if self.stick.getRawButtonPressed(2) == True:
-            self.m_arm_angle.set(-0.1)
+        if self.stick.getRawButton(constants.XBOX_A_BUTTON) == True:
+            if (self.solenoidActived):
+                self.solenoid.set(wpilib.DoubleSolenoid.Value.kReverse)
+            else :
+                self.solenoid.set(wpilib.DoubleSolenoid.Value.kForward)
+            self.solenoidActived = not(self.solenoidActived)
             
-        if self.stick.getRawButtonPressed(3) == True:
-            self.m_arm_lenght.set(0.05)
         
-        if self.stick.getRawButtonPressed(4) == True:
-            self.m_arm_lenght.set(-0.1)
+        # if self.stick.getRawButtonPressed(1) == True:
+        #     self.m_arm_angle.set(0.05)
+
+        # if self.stick.getRawButtonPressed(2) == True:
+        #     self.m_arm_angle.set(-0.1)
+            
+        # if self.stick.getRawButtonPressed(3) == True:
+        #     self.m_arm_lenght.set(0.05)
         
-        if self.stick.getRawButtonPressed(7) == True:
-            self.m_arm_angle.set(0)
-            self.m_arm_lenght.set(0)
+        # if self.stick.getRawButtonPressed(4) == True:
+        #     self.m_arm_lenght.set(-0.1)
+        
+        # if self.stick.getRawButtonPressed(7) == True:
+        #     self.m_arm_angle.set(0)
+        #     self.m_arm_lenght.set(0)
 
 if __name__ == "__main__":
     wpilib.run(MyRobot)

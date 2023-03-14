@@ -1,0 +1,56 @@
+#Motores da tração
+C_LEFT_BACK = 1
+C_LEFT_FRONT = 2
+C_RIGHT_FRONT = 3
+C_RIGHT_BACK = 4
+
+#Motores do braço e garra
+ARM_LENGHT_SPARK_ID = 50
+ARM_ANGLE_SPARK_ID = 51
+
+#Angle limit
+LIMIT_ANGLE_FORWARD = 0
+LIMIT_ANGLE_BACKWARD = 21.7
+#Lenght limit
+LIMIT_LENGHT_FORWARD = 4.97
+LIMIT_LENGHT_BACKWARD = 0
+
+ARM_ANGLE= {
+    "KP" : 0.1,
+    "KI" : 0.0,
+    "KD" : 0.1,   
+}
+
+ARM_LENGHT= {
+    "KP" : 0.1,
+    "KI" : 0.0,
+    "KD" : 0.1,   
+}
+
+#pneumática
+MODULE_ID = 0
+SOLENOID_FORWARD_CHANNEL = 0
+SOLENOID_REVERSE_CHANNEL = 1
+
+#controle 
+
+#XBOX
+#axes
+XBOX_L_ANALOGICO_X = 0
+XBOX_L_ANALOGICO_Y = 1
+XBOX_R_ANALOGICO_X = 4
+XBOX_R_ANALOGICO_Y = 5
+XBOX_LT = 2
+XBOX_RT = 3
+#buttons
+XBOX_A_BUTTON = 1
+XBOX_B_BUTTON  = 2
+XBOX_X_BUTTON  = 3
+XBOX_Y_BUTTON  = 4
+XBOX_LB = 5
+XBOX_RB  = 6
+XBOX_BACK_BUTTON  = 7
+XBOX_START_BUTTON  = 8
+XBOX_L3 = 9
+XBOX_R3  = 10
+

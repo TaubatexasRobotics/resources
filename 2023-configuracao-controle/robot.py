@@ -43,39 +43,33 @@ class MyRobot(wpilib.TimedRobot):
     def teleopPeriodic(self):
 
         self.myRobot.arcadeDrive(
-            self.stick.getRawAxis(1),
-            self.stick.getRawAxis(0)*1.15,
+            self.stick.getRawAxis(constants.XBOX_L_ANALOGICO_Y),
+            self.stick.getRawAxis(constants.XBOX_L_ANALOGICO_X)*1.15,
             True
         )
+        self.m_arm_angle.set(self.stick.getRawAxis(constants.XBOX_R_ANALOGICO_X))
+
 
         if self.stick.getRawButton(constants.XBOX_START_BUTTON) == True:
             self.compressor.enableDigital()
         else:
             self.compressor.disable()
 
-        if self.stick.getRawButton(constants.XBOX_A_BUTTON) == True:
+        if self.stick.getRawButtonPressed(constants.XBOX_A_BUTTON) == True:
             if (self.solenoidActived):
                 self.solenoid.set(wpilib.DoubleSolenoid.Value.kReverse)
             else :
                 self.solenoid.set(wpilib.DoubleSolenoid.Value.kForward)
             self.solenoidActived = not(self.solenoidActived)
+            print("EAI")
             
+        if self.stick.getRawButton(constants.XBOX_RB) == True:
+            self.m_arm_lenght.set(0.1)
+        elif self.stick.getRawButton(constants.XBOX_LB) == True:
+            self.m_arm_lenght.set(-0.1)
+        else:
+            self.m_arm_lenght.set(0)
+            #trocar por permanecer no lugar
         
-        # if self.stick.getRawButtonPressed(1) == True:
-        #     self.m_arm_angle.set(0.05)
-
-        # if self.stick.getRawButtonPressed(2) == True:
-        #     self.m_arm_angle.set(-0.1)
-            
-        # if self.stick.getRawButtonPressed(3) == True:
-        #     self.m_arm_lenght.set(0.05)
-        
-        # if self.stick.getRawButtonPressed(4) == True:
-        #     self.m_arm_lenght.set(-0.1)
-        
-        # if self.stick.getRawButtonPressed(7) == True:
-        #     self.m_arm_angle.set(0)
-        #     self.m_arm_lenght.set(0)
-
 if __name__ == "__main__":
     wpilib.run(MyRobot)

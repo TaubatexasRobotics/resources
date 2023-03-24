@@ -6,11 +6,7 @@ cd "$(dirname $0)"
 
 # Keep this list alphabetically sorted
 BASE_TESTS="
-  cheezy_drive
-  drivetrain
-  pneumatics
-  single_motor_controller
-  uart_usb_arduino
+  single-motor-controller
 "
 
 IGNORED_TESTS="

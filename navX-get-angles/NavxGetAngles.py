@@ -1,5 +1,6 @@
 from navx import AHRS
 
+
 def get_yaw_angle():
     try:
         # Create an instance of the AHRS class
@@ -10,7 +11,8 @@ def get_yaw_angle():
         print("Yaw angle: ", yaw)
     except Exception as e:
         print(e)
-        
+
+
 def get_pitch_angle():
     try:
         # Create an instance of the AHRS class
@@ -21,6 +23,7 @@ def get_pitch_angle():
         print("Pitch angle: ", pitch)
     except Exception as e:
         print(e)
+
 
 def get_roll_angle():
     try:

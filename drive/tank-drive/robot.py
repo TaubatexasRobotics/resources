@@ -7,8 +7,9 @@ C_LEFT_FRONT = 22
 C_RIGHT_FRONT = 33
 C_RIGHT_BACK = 44
 
+
 class Robot(wpilib.TimedRobot):
-    def robotInit(self): 
+    def robotInit(self):
         self.front_left = ctre.WPI_VictorSPX(11)
         self.rear_left = ctre.WPI_VictorSPX(22)
         self.left = wpilib.MotorControllerGroup(self.front_left, self.rear_left)
@@ -20,13 +21,12 @@ class Robot(wpilib.TimedRobot):
         self.drivetrain = wpilib.drive.DifferentialDrive(self.m_left, self.m_right)
         self.drivetrain.setExpiration(0.1)
 
-
         self.stick = wpilib.Joystick(0)
-        
+
         self.m_right.setInverted(True)
 
         # self.stick.get
-        
+
         def teleopInit(self):
             self.drivetrain.setSafetyEnabled(True)
 
@@ -34,6 +34,7 @@ class Robot(wpilib.TimedRobot):
             self.drivetrain.tankDrive(
                 self.stick.getRawAxis(1), self.stick2.getRawAxis(5), True
             )
+
 
 if __name__ == "__main__":
     wpilib.run(Robot)

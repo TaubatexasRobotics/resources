@@ -1,11 +1,10 @@
-
 from navx import AHRS
 import wpilib
 from wpilib.interfaces import GenericHID
 from wpilib.drive import DifferentialDrive
 
-class MyRobot(wpilib.TimedRobot):
 
+class MyRobot(wpilib.TimedRobot):
     def robotInit(self):
         self.front_left_motor = wpilib.PWMVictorSPX(0)
         self.front_right_motor = wpilib.PWMVictorSPX(1)
@@ -17,7 +16,8 @@ class MyRobot(wpilib.TimedRobot):
 
         self.robot_drive = DifferentialDrive(
             wpilib.SpeedControllerGroup(self.front_left_motor, self.back_left_motor),
-            wpilib.SpeedControllerGroup(self.front_right_motor, self.back_right_motor))
+            wpilib.SpeedControllerGroup(self.front_right_motor, self.back_right_motor),
+        )
 
     def autonomousInit(self):
         self.target_distance = 2  # meters

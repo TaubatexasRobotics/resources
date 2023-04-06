@@ -5,7 +5,6 @@ import wpilib.drive
 import ctre
 
 
-
 C_LEFT_BACK = 4
 C_LEFT_FRONT = 3
 C_RIGHT_FRONT = 2
@@ -43,15 +42,16 @@ class MyRobot(wpilib.TimedRobot):
         self.m_right_back = ctre.WPI_VictorSPX(C_RIGHT_BACK)
         self.m_right_back.setInverted(True)
 
-
         # self.m_left = wpilib.SpeedControllerGroup(self.m_left_front, self.m_left_back)
         # self.m_right = wpilib.SpeedControllerGroup(self.m_right_front, self.m_right_back)
-    
-	
+
         # object that handles basic drive operations
-        self.drivetrain = wpilib.drive.DifferentialDrive(self.m_left_back, self.m_right_back)
-        self.drivetrain2 = wpilib.drive.DifferentialDrive(self.m_left_front, self.m_right_front)
-        
+        self.drivetrain = wpilib.drive.DifferentialDrive(
+            self.m_left_back, self.m_right_back
+        )
+        self.drivetrain2 = wpilib.drive.DifferentialDrive(
+            self.m_left_front, self.m_right_front
+        )
 
         self.drivetrain.setExpiration(0.1)
 
@@ -66,6 +66,7 @@ class MyRobot(wpilib.TimedRobot):
         self.drivetrain.arcadeDrive(
             self.stick.getRawAxis(1), self.stick.getRawAxis(0) * C_BUFFER, True
         )
+
     def autonomousInit(self):
         self.navx.reset()
         # self.drivetrain.setSafetyEnabled(True)
@@ -73,25 +74,19 @@ class MyRobot(wpilib.TimedRobot):
 
     def autonomousPeriodic(self):
 
-
         # self.m_left_front.set(0.6)
         # self.m_right_front.set(0.6)
         # self.m_right_back.set(0.6)
         # self.m_left_back.set(0.6)
         yaw = self.navx.getAngle()
-        
-        erro = 0.5 * (- yaw)
+
+        erro = 0.5 * (-yaw)
         print(erro)
-        erro=max(erro,0.3)
+        erro = max(erro, 0.3)
         potencia = 0
-        self.drivetrain.arcadeDrive(
-            potencia, erro , True
-        )
-        self.drivetrain2.arcadeDrive(
-            potencia, erro , True
-        )
+        self.drivetrain.arcadeDrive(potencia, erro, True)
+        self.drivetrain2.arcadeDrive(potencia, erro, True)
+
 
 if __name__ == "__main__":
     wpilib.run(MyRobot)
-
-

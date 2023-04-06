@@ -17,6 +17,7 @@ C_RIGHT_BACK = 44
 
 C_BUFFER = 1
 
+
 class Drivetrain(wpilib.TimedRobot):
     def robotInit(self):
         """Robot initialization function"""
@@ -28,7 +29,9 @@ class Drivetrain(wpilib.TimedRobot):
         self.m_right_back = ctre.WPI_VictorSPX(C_RIGHT_BACK)
 
         self.m_left = wpilib.MotorControllerGroup(self.m_left_front, self.m_left_back)
-        self.m_right = wpilib.MotorControllerGroup(self.m_right_front, self.m_right_back)
+        self.m_right = wpilib.MotorControllerGroup(
+            self.m_right_front, self.m_right_back
+        )
 
         # object that handles basic drive operations
         self.drivetrain = wpilib.drive.DifferentialDrive(self.m_left, self.m_right)
@@ -36,7 +39,7 @@ class Drivetrain(wpilib.TimedRobot):
 
         # joystick 0
         self.stick = wpilib.Joystick(0)
-        
+
         self.m_right.setInverted(True)
 
     def teleopInit(self):
@@ -46,6 +49,7 @@ class Drivetrain(wpilib.TimedRobot):
         self.drivetrain.arcadeDrive(
             self.stick.getRawAxis(1), self.stick.getRawAxis(0) * C_BUFFER, True
         )
+
 
 if __name__ == "__main__":
     wpilib.run(Drivetrain)

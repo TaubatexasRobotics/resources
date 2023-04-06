@@ -2,6 +2,8 @@ import wpilib
 from wpilib import Encoder
 from navx import AHRS
 import ctre
+
+
 class MyRobot(wpilib.TimedRobot):
     def robotInit(self):
         # Initialize the drivetrain motors and encoders
@@ -9,16 +11,16 @@ class MyRobot(wpilib.TimedRobot):
         self.front_right_motor = ctre.VictorSPX(1)
         self.back_left_motor = ctre.VictorSPX(2)
         self.back_right_motor = ctre.VictorSPX(3)
-        
+
         self.left_encoder = wpilib.Encoder(0, 1)
         self.right_encoder = wpilib.Encoder(2, 3)
-        
+
         # Set encoder distance per pulse and direction
         self.left_encoder.setDistancePerPulse(0.01)
         self.right_encoder.setDistancePerPulse(0.01)
         self.left_encoder.setReverseDirection(True)
         self.right_encoder.setReverseDirection(False)
-        
+
         # Initialize the navX
         self.navx = AHRS.create_spi()
 
@@ -30,8 +32,13 @@ class MyRobot(wpilib.TimedRobot):
 
     def autonomousPeriodic(self):
         # Drive forward for 2 meters
-        distance_to_drive = 2.0 / (6 * 3.14) # distance in meters / (wheel diameter * pi)
-        while self.left_encoder.getDistance() < distance_to_drive and self.right_encoder.getDistance() < distance_to_drive:
+        distance_to_drive = 2.0 / (
+            6 * 3.14
+        )  # distance in meters / (wheel diameter * pi)
+        while (
+            self.left_encoder.getDistance() < distance_to_drive
+            and self.right_encoder.getDistance() < distance_to_drive
+        ):
             self.front_left_motor.set(0.5)
             self.front_right_motor.set(-0.5)
             self.back_left_motor.set(0.5)
@@ -56,8 +63,13 @@ class MyRobot(wpilib.TimedRobot):
         self.back_right_motor.set(0)
 
         # Drive forward for 3 meters
-        distance_to_drive = 3.0 / (6 * 3.14) # distance in meters / (wheel diameter * pi)
-        while self.left_encoder.getDistance() < distance_to_drive and self.right_encoder.getDistance() < distance_to_drive:
+        distance_to_drive = 3.0 / (
+            6 * 3.14
+        )  # distance in meters / (wheel diameter * pi)
+        while (
+            self.left_encoder.getDistance() < distance_to_drive
+            and self.right_encoder.getDistance() < distance_to_drive
+        ):
             self.front_left_motor.set(0.5)
             self.front_right_motor.set(-0.5)
             self.back_left_motor.set(0.5)

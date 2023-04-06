@@ -5,9 +5,10 @@ import wpimath.controller
 import wpilib.drive
 import ctre
 
+
 class myRobot(wpilib.TimedRobot):
     def robotInit(self):
-        self.photoCamera = photonvision.PhotonCamera('Teste')
+        self.photoCamera = photonvision.PhotonCamera("Teste")
         self.controller = wpimath.controller.PIDController(
             constants.kP, constants.kI, constants.kD
         )
@@ -18,16 +19,19 @@ class myRobot(wpilib.TimedRobot):
 
     def robotPeriodic(self):
         result = self.photoCamera.getLatestResult()
-        if (result.hasTargets()):
-            print('achei')
+        if result.hasTargets():
+            print("achei")
             rangeTarget = photonvision.PhotonUtils.calculateDistanceToTargetMeters(
                 constants.CAMERA_HEIGHT_METERS,
                 constants.TARGET_HEIGHT_METERS,
                 constants.CAMERA_PITCH_RADIANS,
-                wpimath.Units.degreesToRadians(result.getBestTarget().getPitch())
+                wpimath.Units.degreesToRadians(result.getBestTarget().getPitch()),
             )
-            forwardSpeed = self.controller.calculate(rangeTarget, constants.GOAL_RANGE_METERS)
+            forwardSpeed = self.controller.calculate(
+                rangeTarget, constants.GOAL_RANGE_METERS
+            )
             self.drive.arcadeDrive(forwardSpeed, 0, True)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     wpilib.run(myRobot)

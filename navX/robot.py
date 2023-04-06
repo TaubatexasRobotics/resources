@@ -1,8 +1,9 @@
-
 import wpilib
 import wpilib.drive
 import ctre
 from navx import AHRS
+
+
 class MyRobot(wpilib.TimedRobot):
     def get_yaw_angle(self):
         try:
@@ -15,7 +16,7 @@ class MyRobot(wpilib.TimedRobot):
             return yaw
         except Exception as e:
             print(e)
-            
+
     def get_pitch_angle(self):
         try:
             # Create an instance of the AHRS class
@@ -42,22 +43,25 @@ class MyRobot(wpilib.TimedRobot):
 
     def get_angles(self):
         return {
-            'pitch': self.get_pitch_angle(),
-            'roll': self.get_roll_angle(),
-            'yall': self.get_yaw_angle()
+            "pitch": self.get_pitch_angle(),
+            "roll": self.get_roll_angle(),
+            "yall": self.get_yaw_angle(),
         }
 
     def robotInit(self):
         """Robot initialization function"""
         self.navx = AHRS.create_spi()
- 
+
     def teleopInit(self):
         pass
+
     def autonomousPeriodic(self):
         yaw = self.navx.getAngle()
         print(yaw)
+
     def teleopPeriodic(self):
         pass
- 
+
+
 if __name__ == "__main__":
     wpilib.run(MyRobot)

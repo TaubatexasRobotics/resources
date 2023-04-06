@@ -1,6 +1,8 @@
 import wpilib
 import rev
+
 CAN_ID = 52
+
 
 class MyRobot(wpilib.TimedRobot):
     def robotInit(self):
@@ -16,9 +18,12 @@ class MyRobot(wpilib.TimedRobot):
         self.pid_controller.setD(Kd)
 
         self.motor_position = 10
-        
+
     def teleopPeriodic(self):
-        self.pid_controller.setReference(self.motor_position, rev.CANSparkMax.ControlType.kPosition)
-        
+        self.pid_controller.setReference(
+            self.motor_position, rev.CANSparkMax.ControlType.kPosition
+        )
+
+
 if __name__ == "__main__":
     wpilib.run(MyRobot)

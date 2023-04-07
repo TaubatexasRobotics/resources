@@ -4,6 +4,7 @@ import ctre
 
 from navx import AHRS
 
+
 class MyRobot(wpilib.TimedRobot):
     def get_yaw_angle(self):
         try:
@@ -68,7 +69,7 @@ class MyRobot(wpilib.TimedRobot):
         yaw = self.navx.getAngle()
         # angles = self.get_angles()
         # print(angles['yaw'])
-        #print(yaw)
+        # print(yaw)
         error = 0 - yaw
         velocidade = 0.01 * error
         if yaw > 0:
@@ -80,6 +81,7 @@ class MyRobot(wpilib.TimedRobot):
 
     def teleopPeriodic(self):
         pass
+
 
 if __name__ == "__main__":
     wpilib.run(MyRobot)

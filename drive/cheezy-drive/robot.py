@@ -14,7 +14,7 @@ g_xbox_360 = {
     "lt": 2,
     "rt": 3,
     "right-x-stick": 4,
-    "right-y-stick": 5
+    "right-y-stick": 5,
 }
 
 

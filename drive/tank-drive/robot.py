@@ -7,6 +7,7 @@ C_LEFT_FRONT = 22
 C_RIGHT_FRONT = 33
 C_RIGHT_BACK = 44
 
+
 class Robot(wpilib.TimedRobot):
     def robotInit(self):
         self.front_left = ctre.WPI_VictorSPX(11)
@@ -32,6 +33,7 @@ class Robot(wpilib.TimedRobot):
         self.drivetrain.tankDrive(
             self.stick.getRawAxis(1), self.stick2.getRawAxis(5), True
         )
+
 
 if __name__ == "__main__":
     wpilib.run(Robot)

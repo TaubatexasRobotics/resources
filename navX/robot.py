@@ -57,7 +57,7 @@ class MyRobot(wpilib.TimedRobot):
 
     def autonomousPeriodic(self):
         yaw = self.navx.getAngle()
-        print(yaw)
+        #print(yaw)
 
     def teleopPeriodic(self):
         pass

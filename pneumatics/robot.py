@@ -15,13 +15,13 @@ class Pneumatics(wpilib.TimedRobot):
         self.stick = wpilib.Joystick(0)
 
     def teleopInit(self):
-        self.compressor.stop()
+        self.compressor.disable()
 
     def teleopPeriodic(self):
         if self.stick.getRawButton(1) == True:
-            self.compressor.start()
+            self.compressor.enableDigital()
         else:
-            self.compressor.stop()
+            self.compressor.disable()
 
         # Caso queria com toggle (se estiver off, acontece nada / se estiver desativado, ativa e vice-versa)
         # if self.stick.getRawButton(2) == True:

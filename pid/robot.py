@@ -2,9 +2,7 @@ import wpilib
 import wpilib.drive
 import ctre
 
-# import networktables_project as nt
 from navx import AHRS
-
 
 class MyRobot(wpilib.TimedRobot):
     def get_yaw_angle(self):
@@ -53,45 +51,24 @@ class MyRobot(wpilib.TimedRobot):
     def robotInit(self):
         """Robot initialization function"""
         self.navx = AHRS.create_spi()
-        # self.get_pitch_angle()
-        # motor controllers for traction
         self.m_left_front = ctre.WPI_VictorSPX(33)
         self.m_right_front = ctre.WPI_VictorSPX(22)
         self.m_left_rear = ctre.WPI_VictorSPX(44)
         self.m_right_rear = ctre.WPI_VictorSPX(11)
 
-        # self.shooter = ctre.WPI_VictorSPX(9)
-        # self.track_ball = ctre.WPI_VictorSPX(8)
-        # self.ball_catcher = ctre.WPI_VictorSPX(55)
-
-        self.m_right = wpilib.SpeedControllerGroup(
+        self.m_right = wpilib.MotorControllerGroup(
             self.m_right_front, self.m_right_rear
         )
         self.m_left = wpilib.SpeedControllerGroup(self.m_left_front, self.m_left_rear)
 
-        # object that handles basic drive operations
-        # self.myRobot = wpilib.drive.DifferentialDrive(self.m_left, self.m_right)
-        # self.myRobot.setExpiration(0.1)
-
-        # joystick 0
-        # self.stick = wpilib.Joystick(0)
-
-        # init camera
-        # wpilib.CameraServer.launch('vision.py:main')
-
-        # create timer
-        # self.timer = wpilib.Timer()
-
     def teleopInit(self):
         pass
-
-    # Executed at the start of teleop mode
 
     def autonomousPeriodic(self):
         yaw = self.navx.getAngle()
         # angles = self.get_angles()
         # print(angles['yaw'])
-        print(yaw)
+        #print(yaw)
         error = 0 - yaw
         velocidade = 0.01 * error
         if yaw > 0:
@@ -103,15 +80,6 @@ class MyRobot(wpilib.TimedRobot):
 
     def teleopPeriodic(self):
         pass
-
-    # Runs the motors with tank steering
-    # to invert the axis when robot turns back
-
-
-# quadrado - pegar e subir
-# x - chutar
-# r1 - descer
-# o - desprender a bola
 
 if __name__ == "__main__":
     wpilib.run(MyRobot)

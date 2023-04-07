@@ -55,17 +55,7 @@ class MyRobot(wpilib.TimedRobot):
 
         self.drivetrain.setExpiration(0.1)
 
-        # joystick 0
-        # self.stick = wpilib.Joystick(0)
-
-    def teleopInit(self):
-        # self.drivetrain.setSafetyEnabled(True)
-        pass
-
-    def teleopPeriodic(self):
-        self.drivetrain.arcadeDrive(
-            self.stick.getRawAxis(1), self.stick.getRawAxis(0) * C_BUFFER, True
-        )
+        self.drivetrain.setSafetyEnabled(True)
 
     def autonomousInit(self):
         self.navx.reset()

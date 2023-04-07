@@ -1,9 +1,5 @@
-from wpilib import TimedRobot, SpeedControllerGroup, Joystick, run
+from wpilib import TimedRobot, Joystick, run
 from ctre import WPI_VictorSPX, ControlMode
-from sys import path
-
-path.append("../button_binding")
-from buttons import g_xbox_360
 
 kLeftFront = 1
 kLeftBack = 2
@@ -11,6 +7,15 @@ kRightFront = 3
 kRightBack = 4
 
 kDriverJoystick = 0
+
+g_xbox_360 = {
+    "left-x-stick": 0,
+    "left-y-stick": 1,
+    "lt": 2,
+    "rt": 3,
+    "right-x-stick": 4,
+    "right-y-stick": 5
+}
 
 
 class CheezyDrive(TimedRobot):

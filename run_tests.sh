@@ -33,6 +33,7 @@ autonomous-forward-two-meters/version3
 autonomous-forward-two-meters/version4
 autonomous-forward-two-meters/version5
 pid
+networktables
 "
 
 ALL_TESTS="${BASE_TESTS}"

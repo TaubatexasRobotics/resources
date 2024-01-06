@@ -26,6 +26,7 @@ uart-usb-arduino
 IGNORED_TESTS="
 2023-base-code/version1
 2023-base-code/version2
+2023-base-code/version3-offseason
 button-binding
 autonomous-forward-two-meters/version1
 autonomous-forward-two-meters/version2

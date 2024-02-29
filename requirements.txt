@@ -1,0 +1,5 @@
+pyfrc
+robotpy-halsim-gui
+robotpy-ctre
+robotpy-rev
+robotpy-navx

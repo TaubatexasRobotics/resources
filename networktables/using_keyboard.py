@@ -1,6 +1,6 @@
 import time
-import ntcore # pip install robotpy
-import keyboard # pip install keyboard
+import ntcore  # pip install robotpy
+import keyboard  # pip install keyboard
 
 inst = ntcore.NetworkTableInstance.getDefault()
 table = inst.getTable("keyboard")

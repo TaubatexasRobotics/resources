@@ -2,6 +2,7 @@ import ntcore
 import wpilib
 import phoenix5
 
+
 class EasyNetworkTableExample(wpilib.TimedRobot):
     def robotInit(self) -> None:
         inst = ntcore.NetworkTableInstance.getDefault()

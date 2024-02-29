@@ -63,7 +63,6 @@ class MyRobot(wpilib.TimedRobot):
         pass
 
     def autonomousPeriodic(self):
-
         # self.m_left_front.set(0.6)
         # self.m_right_front.set(0.6)
         # self.m_right_back.set(0.6)

@@ -13,6 +13,7 @@ C_RIGHT_BACK = 44
 @dataclass
 class Option:
     """Class for keeping track of an item in inventory."""
+
     name: str
 
 

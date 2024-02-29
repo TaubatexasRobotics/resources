@@ -77,12 +77,10 @@ class MyRobot(wpilib.TimedRobot):
         self.stick = wpilib.Joystick(0)
 
     def teleopInit(self):
-
         self.myRobot.setSafetyEnabled(True)
         self.compressor.disable()
 
     def teleopPeriodic(self):
-
         self.myRobot.arcadeDrive(
             self.stick.getRawAxis(1), self.stick.getRawAxis(0) * 1.15, True
         )

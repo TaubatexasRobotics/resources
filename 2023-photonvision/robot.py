@@ -13,8 +13,12 @@ class myRobot(wpilib.TimedRobot):
             constants.kP, constants.kI, constants.kD
         )
         self.drive = wpilib.drive.DifferentialDrive(
-            wpilib.MotorControllerGroup(phoenix5.WPI_VictorSPX(0), phoenix5.WPI_VictorSPX(1)),
-            wpilib.MotorControllerGroup(phoenix5.WPI_VictorSPX(2), phoenix5.WPI_VictorSPX(3)),
+            wpilib.MotorControllerGroup(
+                phoenix5.WPI_VictorSPX(0), phoenix5.WPI_VictorSPX(1)
+            ),
+            wpilib.MotorControllerGroup(
+                phoenix5.WPI_VictorSPX(2), phoenix5.WPI_VictorSPX(3)
+            ),
         )
 
     def robotPeriodic(self):

@@ -3,6 +3,7 @@ import wpilib.drive
 import ctre
 import rev
 
+
 class Taubatexas(wpilib.TimedRobot):
     def robotInit(self):
         # Drivetrain
@@ -21,7 +22,9 @@ class Taubatexas(wpilib.TimedRobot):
         self.intake_bar_left = ctre.WPI_VictorSPX(5)
         self.intake_bar_right = ctre.WPI_VictorSPX(12)
         self.intake_bar_right.setInverted(True)
-        self.intake = wpilib.MotorControllerGroup(self.intake_bar_left, self.intake_bar_right)
+        self.intake = wpilib.MotorControllerGroup(
+            self.intake_bar_left, self.intake_bar_right
+        )
 
         # Arm
         self.length = rev.CANSparkMax(52, rev.CANSparkMaxLowLevel.MotorType.kBrushless)
@@ -40,25 +43,27 @@ class Taubatexas(wpilib.TimedRobot):
         self.smartdashboard.putNumber("Intake Right", 0.25)
         self.smartdashboard.putNumber("Arm Length Speed", 1)
         self.smartdashboard.putNumber("Arm Angle Duty Cycle", 0.15)
-        
+
         # Joystick
         self.joystick = wpilib.Joystick(0)
 
         # Timer
         self.timer = wpilib.Timer()
 
-        #self.angle_encoder.setPosition(0)
+        # self.angle_encoder.setPosition(0)
 
     def robotPeriodic(self):
-        self.smartdashboard.putNumber('Arm Angle Encoder', self.angle_encoder.getPosition())
+        self.smartdashboard.putNumber(
+            "Arm Angle Encoder", self.angle_encoder.getPosition()
+        )
 
     def getSpecificAxis(self):
         if self.joystick.getRawAxis(4) > 0:
-          return self.joystick.getRawAxis(4)
+            return self.joystick.getRawAxis(4)
         elif self.joystick.getRawAxis(3) > 0:
-          return -self.joystick.getRawAxis(3)
+            return -self.joystick.getRawAxis(3)
         else:
-          return 0
+            return 0
 
     def setIntake(self, left: float, right: float):
         self.intake_bar_left.set(left)
@@ -74,23 +79,23 @@ class Taubatexas(wpilib.TimedRobot):
         )
 
         if self.joystick.getRawButton(1):
-            #self.intake.set(0.5)
+            # self.intake.set(0.5)
             self.setIntake(
                 -self.smartdashboard.getNumber("Intake Left", 0.25),
-                -self.smartdashboard.getNumber("Intake Right", 0.25)
+                -self.smartdashboard.getNumber("Intake Right", 0.25),
             )
         elif self.joystick.getRawButton(2):
-            #self.intake.set(-0.5)
+            # self.intake.set(-0.5)
             self.setIntake(
                 self.smartdashboard.getNumber("Intake Left", 0.25),
-                self.smartdashboard.getNumber("Intake Right", 0.25)
+                self.smartdashboard.getNumber("Intake Right", 0.25),
             )
         elif self.joystick.getRawButton(9):
             self.intake_bar_left.set(0.1)
         elif self.joystick.getRawButton(10):
             self.intake_bar_right.set(0.1)
         else:
-            #self.intake.set(0)
+            # self.intake.set(0)
             self.setIntake(0, 0)
 
         if self.joystick.getRawButton(5):
@@ -102,25 +107,24 @@ class Taubatexas(wpilib.TimedRobot):
 
         if self.joystick.getRawButton(4):
             self.angle_pid.setReference(
-                self.smartdashboard.getNumber('Arm Angle Duty Cycle', 0.15), 
-                rev.CANSparkMax.ControlType.kDutyCycle
+                self.smartdashboard.getNumber("Arm Angle Duty Cycle", 0.15),
+                rev.CANSparkMax.ControlType.kDutyCycle,
             )
             self.position = self.angle_encoder.getPosition()
         elif self.joystick.getRawButton(3):
             self.angle_pid.setReference(
-                -self.smartdashboard.getNumber('Arm Angle Duty Cycle', 0.15), 
-                rev.CANSparkMax.ControlType.kDutyCycle
+                -self.smartdashboard.getNumber("Arm Angle Duty Cycle", 0.15),
+                rev.CANSparkMax.ControlType.kDutyCycle,
             )
             self.position = self.angle_encoder.getPosition()
         else:
             self.angle_pid.setReference(
-                self.position,
-                rev.CANSparkMax.ControlType.kPosition
+                self.position, rev.CANSparkMax.ControlType.kPosition
             )
-    
-    #def disabledInit(self):
+
+    # def disabledInit(self):
     #    self.angle_encoder.setPosition(0)
-    '''
+    """
     def disabledPeriodic(self):
         if(self.timer.get() < 5)
             self.angle_pid.setReference(
@@ -129,6 +133,8 @@ class Taubatexas(wpilib.TimedRobot):
             )
         else:
             self.timer.stop()
-    '''
+    """
+
+
 if __name__ == "__main__":
-   wpilib.run(Taubatexas)
+    wpilib.run(Taubatexas)

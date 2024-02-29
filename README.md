@@ -6,29 +6,34 @@ For more information about the setup of RobotPy's packages, <a href="https://rob
 ### Prerequisites
 After cloning the repository, you must have <a href="https://www.python.org/downloads/">Python 3</a> and <a href="https://pypi.org/project/pip/">pip</a> installed on your computer.
 ### Installing packages
+### Windows
 ```
-pip install -r requirements.txt
+py -3 -m pip install -r requirements.txt
+```
+### Linux/macOS
+```
+python3 -m pip install -r requirements.txt
 ```
 ## Testing code
 For more information, <a href="https://robotpy.readthedocs.io/en/stable/guide/deploy.html">click here.</a><br>
 ### Windows
 - Executing Robot Simulator
 ```
-py -3 robot.py sim
+py -3 -m robotpy sim
 ```
 - Deploy to the robot
 ```
-py -3 robot.py deploy
+py -3 -m robotpy deploy
 ```
 ---
 ### Linux/macOS
 - Executing Robot Simulator
 ```
-python3 robot.py sim
+python3 -m robotpy sim
 ```
 - Deploy to the robot
 ```
-python3 robot.py deploy
+python3 -m robotpy deploy
 ```
 ## Using Robot Simulator (Reminder highlighted in red)
 ### Do not forget to enable a robot state!<br>

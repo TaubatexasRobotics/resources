@@ -1,6 +1,6 @@
 import wpilib
 import wpilib.drive
-import ctre
+import phoenix5
 import rev
 from navx import AHRS
 import wpimath
@@ -57,7 +57,3 @@ class MyRobot(wpilib.TimedRobot):
 
     def teleopPeriodic(self):
         pass
-
-
-if __name__ == "__main__":
-    wpilib.run(MyRobot)

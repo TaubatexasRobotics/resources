@@ -16,7 +16,3 @@ class MyRobot(wpilib.TimedRobot):
     def robotPeriodic(self):
         value = chooser.getSelected()
         print(value)
-
-
-if __name__ == "__main__":
-    wpilib.run(MyRobot)

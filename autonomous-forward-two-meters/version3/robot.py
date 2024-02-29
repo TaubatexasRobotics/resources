@@ -2,7 +2,7 @@ import wpilib
 from wpilib.drive import DifferentialDrive
 from navx import AHRS
 import math
-import ctre
+import phoenix5
 
 
 class MyRobot(wpilib.TimedRobot):
@@ -15,10 +15,10 @@ class MyRobot(wpilib.TimedRobot):
         self.navx = AHRS.create_spi()
 
         # Set up the drivetrain
-        self.m_left_front = ctre.WPI_VictorSPX(2)
-        self.m_right_front = ctre.WPI_VictorSPX(1)
-        self.m_left_back = ctre.WPI_VictorSPX(4)
-        self.m_right_back = ctre.WPI_VictorSPX(3)
+        self.m_left_front = phoenix5.WPI_VictorSPX(2)
+        self.m_right_front = phoenix5.WPI_VictorSPX(1)
+        self.m_left_back = phoenix5.WPI_VictorSPX(4)
+        self.m_right_back = phoenix5.WPI_VictorSPX(3)
 
         self.m_left = wpilib.MotorControllerGroup(self.m_left_front, self.m_left_back)
         self.m_right = wpilib.MotorControllerGroup(

@@ -1,5 +1,5 @@
 from wpilib import TimedRobot, Joystick, run
-from ctre import WPI_VictorSPX, ControlMode
+from phoenix5 import WPI_VictorSPX, ControlMode
 
 kLeftFront = 1
 kLeftBack = 2
@@ -25,9 +25,6 @@ class CheezyDrive(TimedRobot):
         self.right_front = WPI_VictorSPX(kRightFront)
         self.right_back = WPI_VictorSPX(kRightBack)
 
-        # self.left = SpeedControllerGroup(self.left_front, self.left_back)
-        # self.right = SpeedControllerGroup(self.right_front, self.right_back)
-
         self.joystick = Joystick(0)
 
     def speedControllerGroupByPercentage(self, controller_1, controller_2, value):
@@ -49,7 +46,3 @@ class CheezyDrive(TimedRobot):
             -self.joystick.getRawAxis(g_xbox_360["left-y-stick"]),
             self.joystick.getRawAxis(g_xbox_360["right-x-stick"]),
         )
-
-
-if __name__ == "__main__":
-    run(CheezyDrive)

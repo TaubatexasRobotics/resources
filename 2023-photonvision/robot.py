@@ -3,7 +3,7 @@ import photonvision
 import constants
 import wpimath.controller
 import wpilib.drive
-import ctre
+import phoenix5
 
 
 class myRobot(wpilib.TimedRobot):
@@ -13,8 +13,8 @@ class myRobot(wpilib.TimedRobot):
             constants.kP, constants.kI, constants.kD
         )
         self.drive = wpilib.drive.DifferentialDrive(
-            wpilib.MotorControllerGroup(ctre.WPI_VictorSPX(0), ctre.WPI_VictorSPX(1)),
-            wpilib.MotorControllerGroup(ctre.WPI_VictorSPX(2), ctre.WPI_VictorSPX(3)),
+            wpilib.MotorControllerGroup(phoenix5.WPI_VictorSPX(0), phoenix5.WPI_VictorSPX(1)),
+            wpilib.MotorControllerGroup(phoenix5.WPI_VictorSPX(2), phoenix5.WPI_VictorSPX(3)),
         )
 
     def robotPeriodic(self):
@@ -31,7 +31,3 @@ class myRobot(wpilib.TimedRobot):
                 rangeTarget, constants.GOAL_RANGE_METERS
             )
             self.drive.arcadeDrive(forwardSpeed, 0, True)
-
-
-if __name__ == "__main__":
-    wpilib.run(myRobot)

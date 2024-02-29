@@ -23,7 +23,3 @@ class MyRobot(wpilib.TimedRobot):
         self.pid_controller.setReference(
             self.motor_position, rev.CANSparkMax.ControlType.kPosition
         )
-
-
-if __name__ == "__main__":
-    wpilib.run(MyRobot)

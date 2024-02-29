@@ -1,6 +1,6 @@
 import wpilib
 import wpilib.drive
-import ctre
+import phoenix5
 
 from navx import AHRS
 
@@ -52,10 +52,10 @@ class MyRobot(wpilib.TimedRobot):
     def robotInit(self):
         """Robot initialization function"""
         self.navx = AHRS.create_spi()
-        self.m_left_front = ctre.WPI_VictorSPX(33)
-        self.m_right_front = ctre.WPI_VictorSPX(22)
-        self.m_left_rear = ctre.WPI_VictorSPX(44)
-        self.m_right_rear = ctre.WPI_VictorSPX(11)
+        self.m_left_front = phoenix5.WPI_VictorSPX(33)
+        self.m_right_front = phoenix5.WPI_VictorSPX(22)
+        self.m_left_rear = phoenix5.WPI_VictorSPX(44)
+        self.m_right_rear = phoenix5.WPI_VictorSPX(11)
 
         self.m_right = wpilib.MotorControllerGroup(
             self.m_right_front, self.m_right_rear
@@ -81,7 +81,3 @@ class MyRobot(wpilib.TimedRobot):
 
     def teleopPeriodic(self):
         pass
-
-
-if __name__ == "__main__":
-    wpilib.run(MyRobot)

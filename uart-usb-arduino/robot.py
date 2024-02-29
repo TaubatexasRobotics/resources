@@ -21,7 +21,3 @@ class TestArduino(wpilib.TimedRobot):
         buf = bytearray(sz)
         sz = port.read(buf)
         return buf[:sz].decode("ascii")
-
-
-if __name__ == "__main__":
-    wpilib.run(TestArduino)

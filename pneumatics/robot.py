@@ -33,7 +33,3 @@ class Pneumatics(wpilib.TimedRobot):
             self.solenoid.set(wpilib.DoubleSolenoid.Value.kForward)
         if self.stick.getRawButton(4) == True:
             self.solenoid.set(wpilib.DoubleSolenoid.Value.kReverse)
-
-
-if __name__ == "__main__":
-    wpilib.run(Pneumatics)

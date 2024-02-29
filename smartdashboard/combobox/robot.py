@@ -1,6 +1,6 @@
 import ntcore
 import wpilib
-import ctre
+import phoenix5
 
 from dataclasses import dataclass
 
@@ -13,7 +13,6 @@ C_RIGHT_BACK = 44
 @dataclass
 class Option:
     """Class for keeping track of an item in inventory."""
-
     name: str
 
 
@@ -22,10 +21,10 @@ op1 = Option("asdf1")
 
 class EasyNetworkTableExample(wpilib.TimedRobot):
     def robotInit(self) -> None:
-        self.m_left_back = ctre.WPI_VictorSPX(C_LEFT_BACK)
-        self.m_left_front = ctre.WPI_VictorSPX(C_LEFT_FRONT)
-        self.m_right_front = ctre.WPI_VictorSPX(C_RIGHT_FRONT)
-        self.m_right_back = ctre.WPI_VictorSPX(C_RIGHT_BACK)
+        self.m_left_back = phoenix5.WPI_VictorSPX(C_LEFT_BACK)
+        self.m_left_front = phoenix5.WPI_VictorSPX(C_LEFT_FRONT)
+        self.m_right_front = phoenix5.WPI_VictorSPX(C_RIGHT_FRONT)
+        self.m_right_back = phoenix5.WPI_VictorSPX(C_RIGHT_BACK)
 
         self.m_left = wpilib.MotorControllerGroup(self.m_left_front, self.m_left_back)
         self.m_right = wpilib.MotorControllerGroup(
@@ -56,11 +55,6 @@ class EasyNetworkTableExample(wpilib.TimedRobot):
         self.y = 0
 
     def robotPeriodic(self) -> None:
-
         self.xPub.set(self.x, 0)
         self.yPub.set(self.y, 0)
         self.cPub.set(self.c, 0)
-
-
-if __name__ == "__main__":
-    wpilib.run(EasyNetworkTableExample)

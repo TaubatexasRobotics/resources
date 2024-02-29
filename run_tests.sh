@@ -15,7 +15,6 @@ encoder
 max-neo-encoder
 navX
 neo-motor
-photonvision
 pneumatics
 shuffleboard
 smartdashboard/combobox
@@ -24,6 +23,7 @@ uart-usb-arduino
 "
 
 IGNORED_TESTS="
+2023-photonvision
 2023-base-code/version1
 2023-base-code/version2
 2023-base-code/version3-offseason

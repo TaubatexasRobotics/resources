@@ -1,6 +1,6 @@
 import wpilib
 import wpilib.drive
-import ctre
+import phoenix5
 
 
 C_LEFT_BACK = 11
@@ -37,10 +37,10 @@ class Drivetrain(wpilib.TimedRobot):
         """Robot initialization function"""
 
         # motor controllers for drivetrain
-        self.m_left_back = ctre.WPI_VictorSPX(C_LEFT_BACK)
-        self.m_left_front = ctre.WPI_VictorSPX(C_LEFT_FRONT)
-        self.m_right_front = ctre.WPI_VictorSPX(C_RIGHT_FRONT)
-        self.m_right_back = ctre.WPI_VictorSPX(C_RIGHT_BACK)
+        self.m_left_back = phoenix5.WPI_VictorSPX(C_LEFT_BACK)
+        self.m_left_front = phoenix5.WPI_VictorSPX(C_LEFT_FRONT)
+        self.m_right_front = phoenix5.WPI_VictorSPX(C_RIGHT_FRONT)
+        self.m_right_back = phoenix5.WPI_VictorSPX(C_RIGHT_BACK)
 
         self.m_left = wpilib.MotorControllerGroup(self.m_left_front, self.m_left_back)
         self.m_right = wpilib.MotorControllerGroup(
@@ -87,7 +87,3 @@ class Drivetrain(wpilib.TimedRobot):
 
         elif self.mode > 1:
             self.mode = 0
-
-
-if __name__ == "__main__":
-    wpilib.run(Drivetrain)

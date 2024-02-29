@@ -9,7 +9,3 @@ class MyRobot(wpilib.TimedRobot):
     def robotPeriodic(self):
         # print(self.analog_input.getVoltage())
         print(self.limitSwitch.get())
-
-
-if __name__ == "__main__":
-    wpilib.run(MyRobot)

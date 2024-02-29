@@ -33,7 +33,3 @@ class Robot(wpilib.TimedRobot):
         self.drivetrain.tankDrive(
             self.stick.getRawAxis(1), self.stick2.getRawAxis(5), True
         )
-
-
-if __name__ == "__main__":
-    wpilib.run(Robot)

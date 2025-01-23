@@ -15,8 +15,13 @@ py -3 -m pip install -r requirements.txt
 python3 -m pip install -r requirements.txt
 ```
 ## Testing code
-For more information, <a href="https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-2/python-setup.html">click here.</a><br>
+For more information, <a href="https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-2/python-setup.html">click here.</a><br>. Since 2024, you must need to initialize a RobotPy package, and `pyproject.toml`should <a href="https://docs.wpilib.org/en/stable/docs/software/python/pyproject_toml.html">contains the packages</a> to run some examples of this repository, if it is necessary to reinstall it.
+
 ### Windows
+- Initialize a FRC Python project
+```
+py -3 -m robotpy init
+```
 - Executing Robot Simulator
 ```
 py -3 -m robotpy sim
@@ -31,6 +36,10 @@ py -3 -m robotpy deploy
 ```
 ---
 ### Linux/macOS
+- Initialize a FRC Python project
+```
+python3 -m robotpy init
+```
 - Executing Robot Simulator
 ```
 python3 -m robotpy sim
@@ -52,3 +61,4 @@ Please check out the <a href="https://github.com/robotpy/examples/blob/main/CONT
 
 ## Credits
 <a href="https://robotpy.readthedocs.io/en/stable/index.html">RobotPy</a> (Python 3 for the FRC)
+<a href="https://docs.wpilib.org/en/stable/index.html">WPILib</a>

@@ -15,11 +15,15 @@ py -3 -m pip install -r requirements.txt
 python3 -m pip install -r requirements.txt
 ```
 ## Testing code
-For more information, <a href="https://robotpy.readthedocs.io/en/stable/guide/deploy.html">click here.</a><br>
+For more information, <a href="https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-2/python-setup.html">click here.</a><br>
 ### Windows
 - Executing Robot Simulator
 ```
 py -3 -m robotpy sim
+```
+- Sync to install/update 3rd party packages
+```
+py -3 -m robotpy sync
 ```
 - Deploy to the robot
 ```
@@ -30,6 +34,10 @@ py -3 -m robotpy deploy
 - Executing Robot Simulator
 ```
 python3 -m robotpy sim
+```
+- Sync to install/update 3rd party packages
+```
+python3 -m robotpy sync
 ```
 - Deploy to the robot
 ```

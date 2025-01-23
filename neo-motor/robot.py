@@ -8,7 +8,7 @@ class MyRobot(wpilib.TimedRobot):
     def robotInit(self):
         """Robot initialization function"""
 
-        self.rev_motor = rev.CANSparkMax(CAN_ID, rev.CANSparkMax.MotorType.kBrushless)
+        self.rev_motor = rev.SparkMax(CAN_ID, rev.SparkLowLevel.MotorType.kBrushless)
         self.pid_controller = self.rev_motor.getPIDController()
 
         Kp, Ki, Kd = (0.1, 0, 0.1)

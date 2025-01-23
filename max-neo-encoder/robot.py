@@ -7,7 +7,7 @@ import rev
 class MyRobot(wpilib.TimedRobot):
     def robotInit(self):
         """Robot initialization function"""
-        self.motor = rev.CANSparkMax(52, rev.CANSparkMax.MotorType.kBrushless)
+        self.motor = rev.SparkMax(52, rev.SparkLowLevel.MotorType.kBrushless)
 
         # Configure the encoder
         self.encoder = self.motor.getEncoder()

@@ -10,11 +10,11 @@ class MyRobot(wpilib.TimedRobot):
     def robotInit(self):
         """Robot initialization function"""
         # creating spark max like encoders in setup
-        self.sparkMaxEncoderLeft = rev.CANSparkMax(
-            52, rev.CANSparkMax.MotorType.kBrushless
+        self.sparkMaxEncoderLeft = rev.SparkMax(
+            52, rev.SparkLowLevel.MotorType.kBrushless
         )
-        self.sparkMaxEnocderRight = rev.CANSparkMax(
-            51, rev.CANSparkMax.MotorType.kBrushless
+        self.sparkMaxEnocderRight = rev.SparkMax(
+            51, rev.SparkLowLevel.MotorType.kBrushless
         )
         # create navX to my robot
         self.navx = AHRS.create_spi()

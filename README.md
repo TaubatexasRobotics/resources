@@ -6,6 +6,7 @@ For more information about the setup of RobotPy's packages, <a href="https://rob
 ### Prerequisites
 After cloning the repository, you must have <a href="https://www.python.org/downloads/">Python 3</a> and <a href="https://pypi.org/project/pip/">pip</a> installed on your computer.
 ### Installing packages
+It is recommended to use `robotpy sync`, but you can use pip directly as an alternative.
 ### Windows
 ```
 py -3 -m pip install -r requirements.txt

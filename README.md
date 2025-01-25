@@ -8,12 +8,22 @@ After cloning the repository, you must have <a href="https://www.python.org/down
 ### Installing packages
 It is recommended to use `robotpy sync`, but you can use pip directly as an alternative.
 ### Windows
+- Using pip directly
 ```
 py -3 -m pip install -r requirements.txt
 ```
+- Sync to install/update 3rd party packages
+```
+py -3 -m robotpy sync
+```
 ### Linux/macOS
+- Using pip directly
 ```
 python3 -m pip install -r requirements.txt
+```
+- Sync to install/update 3rd party packages
+```
+python3 -m robotpy sync
 ```
 ## Testing code
 For more information, <a href="https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-2/python-setup.html">click here.</a> Since 2024, you must need to initialize a RobotPy package, and `pyproject.toml`should <a href="https://docs.wpilib.org/en/stable/docs/software/python/pyproject_toml.html">contains the packages</a> to run some examples of this repository (if it is necessary to reinstall it).<br>
@@ -26,10 +36,6 @@ py -3 -m robotpy init
 - Executing Robot Simulator
 ```
 py -3 -m robotpy sim
-```
-- Sync to install/update 3rd party packages
-```
-py -3 -m robotpy sync
 ```
 - Deploy to the robot
 ```
@@ -44,10 +50,6 @@ python3 -m robotpy init
 - Executing Robot Simulator
 ```
 python3 -m robotpy sim
-```
-- Sync to install/update 3rd party packages
-```
-python3 -m robotpy sync
 ```
 - Deploy to the robot
 ```

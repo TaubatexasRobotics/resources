@@ -26,7 +26,8 @@ python3 -m pip install -r requirements.txt
 python3 -m robotpy sync
 ```
 ## Testing code
-For more information, <a href="https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-2/python-setup.html">click here.</a> Since 2024, you must need to initialize a RobotPy package to create a new `pyproject.toml` file. <a href="https://docs.wpilib.org/en/stable/docs/software/python/pyproject_toml.html">Click here for more details.</a><br>
+For more information, <a href="https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-2/python-setup.html">click here.</a> <br>
+Since 2024, you must need to initialize a RobotPy package to create a new `pyproject.toml` <a href="https://docs.wpilib.org/en/stable/docs/software/python/pyproject_toml.html">file.</a><br>
 
 ### Windows
 - Initialize a FRC Python project

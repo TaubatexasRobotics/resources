@@ -2,7 +2,7 @@
 
 This repository contains files separated by category. The file will depend on the type of test you would like to perform on the robot.
 ## Setup & Installation
-For more information about the setup of RobotPy's packages, <a href="https://robotpy.readthedocs.io/en/stable/install/index.html">click here.</a><br>
+For more information about the setup of RobotPy's packages, <a href="https://docs.wpilib.org/en/stable/docs/software/vscode-overview/3rd-party-libraries.html">click here.</a><br>
 ### Prerequisites
 After cloning the repository, you must have <a href="https://www.python.org/downloads/">Python 3</a> and <a href="https://pypi.org/project/pip/">pip</a> installed on your computer.
 ### Installing packages
@@ -26,7 +26,7 @@ python3 -m pip install -r requirements.txt
 python3 -m robotpy sync
 ```
 ## Testing code
-For more information, <a href="https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-2/python-setup.html">click here.</a> Since 2024, you must need to initialize a RobotPy package and `pyproject.toml` <a href="https://docs.wpilib.org/en/stable/docs/software/python/pyproject_toml.html">will be created.</a><br>
+For more information, <a href="https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-2/python-setup.html">click here.</a> Since 2024, you must need to initialize a RobotPy package to create a new `pyproject.toml` file. <a href="https://docs.wpilib.org/en/stable/docs/software/python/pyproject_toml.html">Click here for more details.</a><br>
 
 ### Windows
 - Initialize a FRC Python project

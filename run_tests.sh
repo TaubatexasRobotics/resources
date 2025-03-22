@@ -20,6 +20,7 @@ shuffleboard
 smartdashboard/combobox
 smartdashboard
 uart-usb-arduino
+relay-with-sensor
 "
 
 IGNORED_TESTS="

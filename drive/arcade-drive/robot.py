@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 
 """
-    This is a demo program showing the use of the DifferentialDrive class,
-    specifically it contains the code necessary to operate a robot with
-    a single joystick
+This is a demo program showing the use of the DifferentialDrive class,
+specifically it contains the code necessary to operate a robot with
+a single joystick
 """
 
 import wpilib

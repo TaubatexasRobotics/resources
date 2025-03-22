@@ -2,6 +2,7 @@
 
 import wpilib
 
+
 class RobotWithRelay(wpilib.TimedRobot):
     def robotInit(self) -> None:
         self.relay = wpilib.Relay(0)

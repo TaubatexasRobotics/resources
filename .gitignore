@@ -134,5 +134,8 @@ simgui-ds.json
 simgui-window.json
 simgui.json
 
-#created when running `python robot.py deploy`
+# created when running `python robot.py deploy`
 .deploy_cfg
+
+# those were created when running `python robot.py test`
+tests/

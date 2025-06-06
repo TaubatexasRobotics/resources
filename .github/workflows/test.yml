@@ -33,7 +33,7 @@ jobs:
     - name: Install deps
       run: |
         pip install -U pip
-        pip install 'robotpy[all]<2026.0.0,>=2025.0.0b3' numpy pytest 'robotpy-ctre==2025.0.0'
+        pip install 'robotpy[all]<2026.0.0,>=2025.0.0b3' numpy pytest 'robotpy-ctre==2025.0.0' photonlibpy
     - name: Run tests
       run: bash run_tests.sh
       shell: bash

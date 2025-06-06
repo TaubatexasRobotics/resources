@@ -24,9 +24,9 @@ class TestBot(TimedRobot):
         rotation = 0
         forward = self.joystick.getRawAxis(0)
         if self.joystick.getRawButton(1):
-            result = camera.getLatestResult()
+            result = self.camera.getLatestResult()
             if result.hasTargets():
-                rotation = -turn_controller.calculate(result.getBestTarget().getYaw(), 0)
+                rotation = -self.turn_controller.calculate(result.getBestTarget().getYaw(), 0)
             else:
                 rotation = 0
         else:

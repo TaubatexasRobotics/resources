@@ -139,3 +139,8 @@ simgui.json
 
 # those were created when running `python robot.py test`
 tests/
+
+# Vim temporary (buffer) files
+.*.swp
+*.swo
+*~

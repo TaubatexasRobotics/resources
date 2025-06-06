@@ -21,10 +21,11 @@ smartdashboard/combobox
 smartdashboard
 uart-usb-arduino
 relay-with-sensor
+photonvision/aimattarget/python
+photonvision/aimandrange/python
 "
 
 IGNORED_TESTS="
-2023-photonvision
 2023-base-code/version1
 2023-base-code/version2
 2023-base-code/version3-offseason
@@ -36,6 +37,8 @@ autonomous-forward-two-meters/version4
 autonomous-forward-two-meters/version5
 pid
 networktables
+photonvision/aimattarget/java
+photonvision/aimandrange/java
 "
 
 ALL_TESTS="${BASE_TESTS}"

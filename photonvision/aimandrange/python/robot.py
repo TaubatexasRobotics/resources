@@ -2,10 +2,16 @@ from wpilib import TimedRobot, PWMVictorSPX, Joystick
 from wpilib.drive import DifferentialDrive
 from wpimath.controller import PIDController
 from photonlibpy import PhotonCamera
+from wpimath.units import degreesToRadians, inchesToMeters, feetToMeters, degreesToRadians
+from utils import PhotonUtils
 
 LINEAR_PID = (0.1, 0, 0)
 ANGULAR_PID = (0.1, 0, 0)
 CAMERA_NAME = "Microsoft_LifeCam_3000"
+
+CAMERA_HEIGHT_METERS = inchesToMeters(24)
+TARGET_HEIGHT_METERS = feetToMeters(5)
+CAMERA_PITCH_RADIANS = degreesToRadians(0)
 
 class TestBot(TimedRobot):
     def robotInit(self) -> None:
@@ -22,13 +28,22 @@ class TestBot(TimedRobot):
 
     def teleopPeriodic(self) -> None:
         rotation = 0
-        forward = self.joystick.getRawAxis(0)
+        forward = 0
         if self.joystick.getRawButton(1):
-            result = camera.getLatestResult()
+            result = self.camera.getLatestResult()
             if result.hasTargets():
-                rotation = -turn_controller.calculate(result.getBestTarget().getYaw(), 0)
+                tag_range = PhotonUtils.calculateDistanceToTargetMeters(
+                    CAMERA_HEIGHT_METERS,
+                    TARGET_HEIGHT_METERS,
+                    CAMERA_PITCH_RADIANS,
+                    degreesToRadians(target.getPitch())
+                )
+                forward = -self.forward_controller.calculate(tag_range, GOAL_RANGE_METERS)
+                rotation = -self.turn_controller.calculate(result.getBestTarget().getYaw(), 0)
             else:
                 rotation = 0
+                forward = 0
         else:
-            rotation = self.joystick.getRawAxis(1)
+            rotation = self.joystick.getRawAxis(0)
+            forward = self.joystick.getRawAxis(1)
         self.drivetrain.arcadeDrive(forward, rotation)

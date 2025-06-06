@@ -2,7 +2,12 @@ from wpilib import TimedRobot, PWMVictorSPX, Joystick
 from wpilib.drive import DifferentialDrive
 from wpimath.controller import PIDController
 from photonlibpy import PhotonCamera
-from wpimath.units import degreesToRadians, inchesToMeters, feetToMeters, degreesToRadians
+from wpimath.units import (
+    degreesToRadians,
+    inchesToMeters,
+    feetToMeters,
+    degreesToRadians,
+)
 from utils import PhotonUtils
 
 LINEAR_PID = (0.1, 0, 0)
@@ -12,6 +17,7 @@ CAMERA_NAME = "Microsoft_LifeCam_3000"
 CAMERA_HEIGHT_METERS = inchesToMeters(24)
 TARGET_HEIGHT_METERS = feetToMeters(5)
 CAMERA_PITCH_RADIANS = degreesToRadians(0)
+
 
 class TestBot(TimedRobot):
     def robotInit(self) -> None:
@@ -36,10 +42,14 @@ class TestBot(TimedRobot):
                     CAMERA_HEIGHT_METERS,
                     TARGET_HEIGHT_METERS,
                     CAMERA_PITCH_RADIANS,
-                    degreesToRadians(target.getPitch())
+                    degreesToRadians(target.getPitch()),
                 )
-                forward = -self.forward_controller.calculate(tag_range, GOAL_RANGE_METERS)
-                rotation = -self.turn_controller.calculate(result.getBestTarget().getYaw(), 0)
+                forward = -self.forward_controller.calculate(
+                    tag_range, GOAL_RANGE_METERS
+                )
+                rotation = -self.turn_controller.calculate(
+                    result.getBestTarget().getYaw(), 0
+                )
             else:
                 rotation = 0
                 forward = 0

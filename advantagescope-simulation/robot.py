@@ -18,7 +18,6 @@
 @note        Sensores reais e feedback de hardware não estão implementados; apenas simulação.
 @version     2.1
 @date        2025-09-01
-@license     MIT
 @authors     Taubatexas 7459 
 """
 
@@ -137,4 +136,5 @@ if __name__ == "__main__":
     inst = ntcore.NetworkTableInstance.getDefault() # Obtém a instância padrão do NetworkTables para comunicação com ferramentas como o SmartDashboard. 
     inst.startServer(port=5810) # Inicia o servidor do NetworkTables na porta 5810 para troca de dados.
     wpilib.run(MyRobot) # Inicia o programa do robô, executando a classe MyRobot usando o framework do WPILib.
+
     

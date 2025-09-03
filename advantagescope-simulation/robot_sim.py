@@ -17,7 +17,6 @@
 @note        Sensores reais e feedback de hardware não estão implementados; apenas simulação.
 @version     2.1
 @date        2025-09-01
-@license     MIT
 @authors     Taubatexas 7459 
 """
 
@@ -110,5 +109,6 @@ class SimpleKinematicSim:
 
         # Atualiza a pose do robô
         self.pose = Pose2d(self.pose.X() + dx, self.pose.Y() + dy, Rotation2d.fromDegrees(heading_for_field))
+
 
         return raw_v, raw_r, self.pose, self.heading

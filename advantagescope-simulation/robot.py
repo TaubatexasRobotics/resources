@@ -81,7 +81,7 @@ class MyRobot(wpilib.TimedRobot):
 
         # Dados para monitoramento (descomente para ver no SmartDashboard)
         # SmartDashboard.putNumber("Velocidade", velocidade)
-        # SmartDashboard.putNumber("Rotação", comando_rotacao)
+        # SmartDashboard.putNumber("Rotação", rotacao)
         # SmartDashboard.putNumber("Posição X (m)", pose.X())
         # SmartDashboard.putNumber("Posição Y (m)", pose.Y())
         # SmartDashboard.putNumber("Orientação (graus)", pose.rotation().degrees())
@@ -138,3 +138,4 @@ if __name__ == "__main__":
     wpilib.run(MyRobot) # Inicia o programa do robô, executando a classe MyRobot usando o framework do WPILib.
 
     
+

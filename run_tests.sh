@@ -4,6 +4,7 @@ cd "$(dirname $0)"
 
 # Keep this list alphabetically sorted
 BASE_TESTS="
+advantagescope-simulation
 autonomous-navX-neo-with-spark
 digitalinput
 drive/arcade-drive
@@ -26,6 +27,7 @@ photonvision/aimandrange/python
 "
 
 IGNORED_TESTS="
+led-strip-ws2812b
 2023-base-code/version1
 2023-base-code/version2
 2023-base-code/version3-offseason

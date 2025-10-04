@@ -1,0 +1,91 @@
+{
+  "HALProvider": {
+    "Encoders": {
+      "0": {
+        "header": {
+          "open": true
+        }
+      },
+      "1": {
+        "header": {
+          "open": true
+        }
+      },
+      "window": {
+        "visible": true
+      }
+    },
+    "Other Devices": {
+      "ADIS16470[0]": {
+        "header": {
+          "open": true
+        }
+      }
+    }
+  },
+  "NTProvider": {
+    "types": {
+      "/FMSInfo": "FMSInfo",
+      "/SmartDashboard/Algae Intake": "Mechanism2d",
+      "/SmartDashboard/Auto Selector": "String Chooser",
+      "/SmartDashboard/Field": "Field2d",
+      "/SmartDashboard/Intake": "Mechanism2d",
+      "/SmartDashboard/LED Strip": "Mechanism2d",
+      "/SmartDashboard/Reset Position": "String Chooser"
+    },
+    "windows": {
+      "/SmartDashboard/Auto Selector": {
+        "window": {
+          "visible": true
+        }
+      },
+      "/SmartDashboard/Field": {
+        "bottom": 1638,
+        "height": 8.051901817321777,
+        "left": 534,
+        "right": 3466,
+        "top": 291,
+        "width": 17.54825210571289,
+        "window": {
+          "visible": true
+        }
+      },
+      "/SmartDashboard/Reset Position": {
+        "window": {
+          "visible": true
+        }
+      }
+    }
+  },
+  "NetworkTables": {
+    "Persistent Values": {
+      "open": false
+    },
+    "transitory": {
+      "SmartDashboard": {
+        "Field": {
+          "double[]##v_/SmartDashboard/Field/Robot": {
+            "open": true
+          }
+        },
+        "open": true
+      }
+    }
+  },
+  "NetworkTables Info": {
+    "AdvantageScope@1": {
+      "Subscribers": {
+        "open": true
+      }
+    },
+    "Connections": {
+      "open": true
+    },
+    "Server": {
+      "Publishers": {
+        "open": true
+      }
+    },
+    "visible": true
+  }
+}

@@ -1,5 +1,5 @@
 # Byte-compiled / optimized / DLL files
-__pycache__/
+*/__pycache__/
 *.py[cod]
 *$py.class
 
@@ -129,10 +129,10 @@ dmypy.json
 .pyre/
 
 # those were created when running `python robot.py sim`
-networktables.json
-simgui-ds.json
-simgui-window.json
-simgui.json
+*/networktables.json
+*/simgui-ds.json
+*/simgui-window.json
+*/simgui.json
 
 # created when running `python robot.py deploy`
 .deploy_cfg

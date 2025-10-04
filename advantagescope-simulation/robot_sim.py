@@ -9,7 +9,7 @@
              - Aplicar limites de segurança e faixa morta (deadband).
              - Calcular nova posição (x, y) e orientação do robô.
              - Retornar a pose para visualização no AdvantageScope ou Field2d.
-             
+
              Ideal para estudo e prática de programação de robôs FRC sem hardware físico.
 @usage       from robot_sim import SimpleKinematicSim
              sim = SimpleKinematicSim(initial_x=1.5, initial_y=2.0, initial_yaw_deg=0.0)
@@ -17,19 +17,27 @@
 @note        Sensores reais e feedback de hardware não estão implementados; apenas simulação.
 @version     2.1
 @date        2025-09-01
-@authors     Taubatexas 7459 
+@authors     Taubatexas 7459
 """
 
 # Importa bibliotecas necessárias
 import math  # Funções matemáticas (seno, cosseno, radianos, etc.)
 import time  # Controle de tempo e temporização (time.sleep, time.time)
-from wpimath.geometry import Pose2d, Rotation2d  
+from wpimath.geometry import Pose2d, Rotation2d
+
 # Pose2d: representa posição (x, y) + orientação no plano
 # Rotation2d: representa apenas a orientação (ângulo) no plano
 
+
 class SimpleKinematicSim:
-    def __init__(self, initial_x=0.0, initial_y=0.0, initial_yaw_deg=0.0,
-                 max_linear_mps=2.0, max_angular_rps=math.radians(120.0)):
+    def __init__(
+        self,
+        initial_x=0.0,
+        initial_y=0.0,
+        initial_yaw_deg=0.0,
+        max_linear_mps=2.0,
+        max_angular_rps=math.radians(120.0),
+    ):
         """
         Inicializa a simulação do robô.
         Parâmetros:
@@ -39,12 +47,14 @@ class SimpleKinematicSim:
         - max_angular_rps: Velocidade angular máxima (rad/s)
         """
         # Define a posição inicial e orientação
-        self.pose = Pose2d(initial_x, initial_y, Rotation2d.fromDegrees(initial_yaw_deg))
+        self.pose = Pose2d(
+            initial_x, initial_y, Rotation2d.fromDegrees(initial_yaw_deg)
+        )
         self.heading = math.radians(initial_yaw_deg)  # Orientação em radianos
-        self.MAX_LINEAR_MPS = max_linear_mps          # Velocidade máxima linear
-        self.MAX_ANGULAR_RPS = max_angular_rps        # Velocidade máxima angular
-        self.DEADBAND = 0.2                           # Faixa morta do joystick
-        self._last_time = None                        # Último tempo para cálculo de dt
+        self.MAX_LINEAR_MPS = max_linear_mps  # Velocidade máxima linear
+        self.MAX_ANGULAR_RPS = max_angular_rps  # Velocidade máxima angular
+        self.DEADBAND = 0.2  # Faixa morta do joystick
+        self._last_time = None  # Último tempo para cálculo de dt
 
     def apply_deadband(self, value):
         """
@@ -101,14 +111,21 @@ class SimpleKinematicSim:
         # Usa a velocidade linear (m/s), a orientação atual (self.heading, em radianos) e o intervalo de tempo (dt, em segundos).
         # math.cos(self.heading) e math.sin(self.heading) decompõem a velocidade nas direções x e y, respectivamente,
         # para determinar quanto o robô se move em cada eixo durante o intervalo dt.
-        dx = linear_vel * math.cos(self.heading) * dt  # Deslocamento na direção x (metros)
-        dy = linear_vel * math.sin(self.heading) * dt  # Deslocamento na direção y (metros)
+        dx = (
+            linear_vel * math.cos(self.heading) * dt
+        )  # Deslocamento na direção x (metros)
+        dy = (
+            linear_vel * math.sin(self.heading) * dt
+        )  # Deslocamento na direção y (metros)
 
         # Converte a orientação para graus para o Field2d
         heading_for_field = math.degrees(self.heading)
 
         # Atualiza a pose do robô
-        self.pose = Pose2d(self.pose.X() + dx, self.pose.Y() + dy, Rotation2d.fromDegrees(heading_for_field))
-
+        self.pose = Pose2d(
+            self.pose.X() + dx,
+            self.pose.Y() + dy,
+            Rotation2d.fromDegrees(heading_for_field),
+        )
 
         return raw_v, raw_r, self.pose, self.heading

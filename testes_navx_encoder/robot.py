@@ -2,38 +2,33 @@
 # -*- coding: utf-8 -*-
 """
 @file        robot.py
-@brief       Teste do sensor NavX com RobotPy.
-@details     Script simples para validar a comunicação e leitura do sensor NavX-MXP/Micro
-             utilizando a biblioteca robotpy-navx. Implementa:
-             - Inicialização do sensor AHRS via interface SPI.
-             - Tratamento de exceção caso o sensor não esteja conectado.
-             - Exibição contínua dos valores de Yaw, Pitch e Roll no console.       
-             Este código é voltado para testes, servindo para verificar se o módulo navx foi instalado corretamente 
-             e se há leitura de dados válida do giroscópio. O código implementa tanto o controle de movimentação do robô 
-             quanto a leitura de sensores inerciais da NavX. É adequado para testes integrados de hardware e validação de 
-             comunicação com o sensor.
+@brief       Teste do sensor NavX com RobotPy + Encoders AMT103
+@details     Script integrado para validar comunicação NavX + Encoders.
+             Implementa controle arcade, leitura inercial e odometria.
 @note        Necessário instalar: python -m pip install robotpy-navx
-@version     1.0
-@date        2025-10-07
+@version     1.1 (Encoders adicionados)
+@date        2025-10-18
 @authors     Taubatexas 7459
 """
+
 import wpilib                      # Importa a biblioteca principal do WPILib para controle de robôs FRC
 import wpilib.drive                # Importa o módulo de tração diferencial do WPILib
 from wpilib import SmartDashboard  # Interface para exibir dados no SmartDashboard 
-import rev                         # Importa a biblioteca para controladores de motor da REV Robotics
+import phoenix5                    # Controladores CAN Phoenix
 import navx                        # Importa a biblioteca para o sensor NavX
+import math                        # Importa a biblioteca padrão de funções matemáticas
 
 # Define a classe principal do robô, herdando de TimedRobot para operação em ciclos fixos
 class MyRobot(wpilib.TimedRobot):
     def robotInit(self):
-        # Inicializa o motor frontal esquerdo (Spark Max, porta 55, tipo brushed)
-        self.motor_esquerda_frente = rev.SparkMax(55, rev.SparkLowLevel.MotorType.kBrushed)
-        # Inicializa o motor traseiro esquerdo (Spark Max, porta 51, tipo brushed)
-        self.motor_esquerda_tras = rev.SparkMax(51, rev.SparkLowLevel.MotorType.kBrushed)
-        # Inicializa o motor frontal direito (Spark Max, porta 54, tipo brushed)
-        self.motor_direita_frente = rev.SparkMax(54, rev.SparkLowLevel.MotorType.kBrushed)
-        # Inicializa o motor traseiro direito (Spark Max, porta 53, tipo brushed)
-        self.motor_direita_tras = rev.SparkMax(53, rev.SparkLowLevel.MotorType.kBrushed)
+        # Inicializa o motor frontal esquerdo
+        self.motor_esquerda_frente = phoenix5.WPI_VictorSPX(2)
+        # Inicializa o motor traseiro esquerdo 
+        self.motor_esquerda_tras = phoenix5.WPI_VictorSPX(1)
+        # Inicializa o motor frontal direito
+        self.motor_direita_frente = phoenix5.WPI_VictorSPX(3)
+        # Inicializa o motor traseiro direito
+        self.motor_direita_tras = phoenix5.WPI_VictorSPX(4)
 
         # Agrupa os motores do lado esquerdo para controle unificado
         self.esquerda = wpilib.MotorControllerGroup(
@@ -64,6 +59,30 @@ class MyRobot(wpilib.TimedRobot):
         # Zera o ângulo de guinada (yaw) na inicialização para referência
         self.navx.reset()
 
+        # Configuração dos encoders:
+        # Encoders AMT103 Configuração:
+        # Esquerdo: DIO 5(A) e 6(B) - Distância Positiva Frente
+        # Direito: DIO 7(A) e 8(B) - Reverse=True (positivo frente)
+
+        self.left_encoder = wpilib.Encoder(5,6)
+        self.right_encoder = wpilib.Encoder(7,8, True)
+
+        kEncoderPPR = 2048.0   # Pulsos por revolução AMT103
+        kWheelDiameter = 0.152 # Diâmetro roda (6 polegadas)
+        kEncoderDistancePerPulse = (kWheelDiameter * math.pi) / (4 * kEncoderPPR)
+        
+        # Aplica calibração - 1 pulse = ~0.0000117m
+        self.left_encoder.setDistancePerPulse(kEncoderDistancePerPulse)
+        self.right_encoder.setDistancePerPulse(kEncoderDistancePerPulse)
+
+        # Adicional: Configurações recomendadas para encoders - TESTAR
+        #self.left_encoder.setSamplesToAverage(1)   # Rápida resposta
+        #self.right_encoder.setSamplesToAverage(1)
+        #self.left_encoder.setMaxPeriod(0.1)        # Timeout 100ms
+        #self.right_encoder.setMaxPeriod(0.1)
+
+        SmartDashboard.putString("6. Encoders", "Inicializados!")
+
     # Método chamado uma vez ao entrar no modo teleoperado
     def teleopInit(self):
         # Ativa a segurança da tração, desativando motores se não houver comandos
@@ -84,6 +103,27 @@ class MyRobot(wpilib.TimedRobot):
         else:
             # Caso a NavX não esteja conectada, exibe mensagem de erro
             SmartDashboard.putString("5. NavX Status", "Desconectado ou não inicializado")
+
+        # Dados dos encoders
+
+        # Distância Total (metros)
+        left_dist = self.left_encoder.getDistance()
+        right_dist = self.right_encoder.getDistance()
+
+        SmartDashboard.putNumber("Left Encoder Distance (m)", left_dist)
+        SmartDashboard.putNumber("Right Encoder Distance (m)", right_dist)
+
+        # Velocidade (m/s)
+        SmartDashboard.putNumber("Left Encoder Rate (m/s)", self.left_encoder.getRate())
+        SmartDashboard.putNumber("Right Encoder Rate (m/s)", self.right_encoder.getRate())
+
+        # Distância Média (odometria simples)
+        avg_distance = (left_dist + right_dist) / 2.0
+        SmartDashboard.putNumber("Avg Distance (m)", avg_distance)
+
+        # Erro de alinhamento (diagnóstico) - TESTAR
+        #alignment_error = abs(left_dist - right_dist) * 100  # cm
+        #SmartDashboard.putNumber("Alignment Error (cm)", alignment_error)
 
 # Outros parâmetros NavX:
 

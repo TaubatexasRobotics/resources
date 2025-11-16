@@ -1,0 +1,34 @@
+{
+  "HALProvider": {
+    "Other Devices": {
+      "navX-Sensor[4]": {
+        "header": {
+          "open": true
+        }
+      }
+    }
+  },
+  "NTProvider": {
+    "types": {
+      "/FMSInfo": "FMSInfo",
+      "/SmartDashboard/Modo Autônomo": "String Chooser"
+    },
+    "windows": {
+      "/SmartDashboard/Modo Autônomo": {
+        "window": {
+          "visible": true
+        }
+      }
+    }
+  },
+  "NetworkTables": {
+    "transitory": {
+      "SmartDashboard": {
+        "open": true
+      }
+    }
+  },
+  "NetworkTables Info": {
+    "visible": true
+  }
+}

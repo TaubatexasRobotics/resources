@@ -5,6 +5,7 @@ cd "$(dirname $0)"
 # Keep this list alphabetically sorted
 BASE_TESTS="
 advantagescope-simulation
+advantagescope-simulation-sensors
 autonomous-navX-neo-with-spark
 digitalinput
 drive/arcade-drive
@@ -20,6 +21,8 @@ pneumatics
 shuffleboard
 smartdashboard/combobox
 smartdashboard
+testes_navx_encoder/1_testes_basicos
+testes_navx_encoder/2_testes_calibracao
 uart-usb-arduino
 relay-with-sensor
 photonvision/aimattarget/python

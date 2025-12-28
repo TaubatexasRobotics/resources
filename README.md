@@ -1,10 +1,23 @@
 # Resources and test files/modules
-
-This repository contains files separated by category. The file will depend on the type of test you would like to perform on the robot.
+## WARNING: This section is intended for beginners (KISS). If you consider yourself more experienced, you may skip it.
+This repository contains files separated by category. The file will depend on the type of test you would like to perform on the robot or directly on some simulator.
 ## Setup & Installation
 For more information about the setup of RobotPy's packages, <a href="https://docs.wpilib.org/en/stable/docs/software/vscode-overview/3rd-party-libraries.html">click here.</a><br>
 ### Prerequisites
-After cloning the repository, you must have <a href="https://www.python.org/downloads/">Python 3</a> and <a href="https://pypi.org/project/pip/">pip</a> installed on your computer.
+After cloning the repository, the system must have <a href="https://www.python.org/downloads/">Python 3</a> and <a href="https://pypi.org/project/pip/">pip</a> installed on your computer.
+#### Windows
+The most common way to set up Python on Windows is to download it directly using the official Windows installer. It is recommended to avoid any restrictions related to administrator privileges and to ensure there are no character limitations in the `PATH`.
+Additionally, verify that the Python 3 installation directory and pip are correctly added to the Windows `PATH` <a href="https://learn.microsoft.com/en-us/previous-versions/office/developer/sharepoint-2010/ee537574(v=office.14)">environment variable</a>. You also could use <a href="https://learn.microsoft.com/en-us/windows/wsl/install">Windows Subsystem for Linux</a> and progress the instalation with Linux section on it.
+
+#### Linux
+Many Linux distributions use Python internally for system tools, scripts, and utilities. For this reason, it is strongly recommended to create and use a Python virtual environment (`venv`) to avoid conflicts with system packages.
+```
+python3 -m venv env
+source env/bin/activate
+```
+
+As an (dangerous) alternative, you can use `--break-system-packages` inside your pip commands (not recommended).
+
 ### Installing packages
 It is recommended to use `robotpy sync`, but you can use pip directly as an alternative.
 ### Windows

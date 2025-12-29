@@ -16,7 +16,7 @@ python3 -m venv env
 source env/bin/activate
 ```
 
-As an (dangerous) alternative, you can use `--break-system-packages` inside your pip commands (not recommended).
+Alternatively (and dangerously), you can use `--break-system-packages` within the pip-related commands (not recommended).
 
 ### Installing packages
 It is recommended to use `robotpy sync`, but you can use pip directly as an alternative.
@@ -40,7 +40,7 @@ python3 -m robotpy sync
 ```
 ## Testing code
 For more information, <a href="https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-2/python-setup.html">click here.</a> <br>
-Since 2024, you must need to initialize a RobotPy package to create a new `pyproject.toml` <a href="https://docs.wpilib.org/en/stable/docs/software/python/pyproject_toml.html">file.</a><br>
+Since 2024, you must need to initialize a RobotPy project to create a new `pyproject.toml` <a href="https://docs.wpilib.org/en/stable/docs/software/python/pyproject_toml.html">file.</a><br>
 
 ### Windows
 - Initialize a FRC Python project

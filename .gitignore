@@ -133,6 +133,7 @@ dmypy.json
 */simgui-ds.json
 */simgui-window.json
 */simgui.json
+.wpilib
 
 # created when running `python robot.py deploy`
 .deploy_cfg

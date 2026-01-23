@@ -24,5 +24,6 @@ components = [
 # is equivalent to a line in requirements.txt)
 requires = [
     "robotpy-pathplannerlib",
-    "robotpy-rev"
+    "robotpy-rev",
+    "robotpy-navx"
 ]

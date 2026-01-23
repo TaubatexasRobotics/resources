@@ -1,7 +1,14 @@
 import wpilib
-
+import commands2
+from RobotContainer import RobotContainer
 # TODO: insert robot code here
-class MyRobot(wpilib.TimedRobot):
+class MyRobot(commands2.TimedCommandRobot):
+
     def robotInit(self):
-        return super().robotInit()
-    
+        self.robotContainer = RobotContainer()
+
+    def autonomousPeriodic(self):
+        self.autoCommand = self.robotContainer.getAuto()    
+
+        if self.autoCommand:
+            self.autoCommand.schedule()

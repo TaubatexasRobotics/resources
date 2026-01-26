@@ -38,8 +38,10 @@ class DriveSubsystem(Subsystem):
 
         #Configuração do PID dos sparkmax
         config = rev.SparkMaxConfig()
+        config.closedLoop.maxOutput(0.5)
+        config.closedLoop.minOutput(-0.5)
         config.closedLoop.setFeedbackSensor(rev.FeedbackSensor.kPrimaryEncoder)
-        config.closedLoop.pid(0.00005,0,0)
+        config.closedLoop.pid(0.000005,0,0)
         config.closedLoop.velocityFF(0.15)
 
         #Ajusta o getPosition do encoder para ser em metros
@@ -74,12 +76,19 @@ class DriveSubsystem(Subsystem):
 
         #Armazena a config feita no pathplanner
         pathConfig = RobotConfig.fromGUISettings()
-
+        
+        self.fictionalEncoderRight = 0
+        self.fictionalEncoderLeft = 0
+        self.fictionalNavx = 0
+        
         #Cria a rotação do robo
-        self.rotation = Rotation2d.fromDegrees(self.navx.getAngle())
+        #self.rotation = Rotation2d.fromDegrees(self.navx.getAngle())
+
+        #Cria a rotação para simulação
+        self.rotation = Rotation2d.fromDegrees(self.fictionalNavx)
 
         #Cria a posição inicial do robo
-        self.pose = Pose2d(0,0, self.rotation)
+        self.pose = Pose2d(2,7, self.rotation)
 
         #Cria a odometria usando rotação e posição
         self.odometry = DifferentialDriveOdometry(
@@ -106,8 +115,8 @@ class DriveSubsystem(Subsystem):
         # Boolean supplier that controls when the path will be mirrored for the red alliance
         # This will flip the path being followed to the red side of the field.
         # THE ORIGIN WILL REMAIN ON THE BLUE SIDE
-        return DriverStation.getAlliance() == DriverStation.Alliance.kRed
-    
+        #return DriverStation.getAlliance() == DriverStation.Alliance.kRed
+        return False
     #Envia a posição atual do robo
     def getPose(self):
         return self.odometry.getPose()
@@ -130,10 +139,10 @@ class DriveSubsystem(Subsystem):
         leftMotorRpm = leftRpm * self.gearRatio
         rightMotorRpm = rightRpm * self.gearRatio
 
-        self.leftClosedLoop.setReference(leftMotorRpm, rev.SparkBase.ControlType.kVelocity)
-        self.left2ClosedLoop.setReference(leftMotorRpm, rev.SparkBase.ControlType.kVelocity)
-        self.rightClosedLoop.setReference(rightMotorRpm, rev.SparkBase.ControlType.kVelocity)
-        self.right2ClosedLoop.setReference(rightMotorRpm, rev.SparkBase.ControlType.kVelocity)
+        self.leftClosedLoop.setReference(leftMotorRpm, rev.SparkMax.ControlType.kVelocity)
+        self.left2ClosedLoop.setReference(leftMotorRpm, rev.SparkMax.ControlType.kVelocity)
+        self.rightClosedLoop.setReference(rightMotorRpm, rev.SparkMax.ControlType.kVelocity)
+        self.right2ClosedLoop.setReference(rightMotorRpm, rev.SparkMax.ControlType.kVelocity)
 
     #Retorna a velocidade das rodos
     def getRobotRelativeSpeeds(self):
@@ -173,3 +182,40 @@ class DriveSubsystem(Subsystem):
             self.motor1.getEncoder().getPosition(),
             self.motor3.getEncoder().getPosition(),
         )
+
+
+        #lógica para a simualção de movimento
+        if self.rightClosedLoop.getSetpoint() > 0.0:
+            self.fictionalEncoderRight += 0.05
+            self.rightEncoder.setPosition(self.fictionalEncoderRight)
+        elif self.rightClosedLoop.getSetpoint() < 0.0:
+            self.fictionalEncoderRight -= 0.05
+            self.rightEncoder.setPosition(self.fictionalEncoderRight)
+        
+        if self.leftClosedLoop.getSetpoint() > 0.0:
+            self.fictionalEncoderLeft += 0.05
+            self.leftEncoder.setPosition(self.fictionalEncoderLeft)
+        elif self.leftClosedLoop.getSetpoint() < 0.0:
+            self.fictionalEncoderLeft -= 0.05
+            self.leftEncoder.setPosition(self.fictionalEncoderLeft)
+
+        #lógica para a simulação da rotação
+        rotateRight = (self.rightClosedLoop.getSetpoint() > self.leftClosedLoop.getSetpoint())
+        rotateLeft = (self.leftClosedLoop.getSetpoint() > self.rightClosedLoop.getSetpoint())
+        self.simulateNavx(rotateRight, rotateLeft)
+
+    def simulateNavx(self, rotateRight: bool, rotateLeft: bool):
+        if self.fictionalNavx < 0:
+            self.fictionalNavx = 359.999
+        elif self.fictionalNavx > 359.999:
+            self.fictionalNavx = 0
+        else:
+            if rotateRight:
+                self.fictionalNavx += 1
+            if rotateLeft:
+                self.fictionalNavx -= 1
+        self.rotation = Rotation2d.fromDegrees(self.fictionalNavx)
+
+        
+        
+    

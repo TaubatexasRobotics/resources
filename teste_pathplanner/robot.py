@@ -7,7 +7,7 @@ class MyRobot(commands2.TimedCommandRobot):
     def robotInit(self):
         self.robotContainer = RobotContainer()
 
-    def autonomousPeriodic(self):
+    def autonomousInit(self):
         self.autoCommand = self.robotContainer.getAuto()    
 
         if self.autoCommand:

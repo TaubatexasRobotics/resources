@@ -183,37 +183,79 @@ class DriveSubsystem(Subsystem):
             self.motor3.getEncoder().getPosition(),
         )
 
+        rightSpeedFactor = self.rightClosedLoop.getSetpoint() / 10000
+        leftSpeedFactor = self.leftClosedLoop.getSetpoint() / 10000
+
+        if rightSpeedFactor < 0:
+            rightSpeedFactor *= -1
+        if leftSpeedFactor < 0:
+            leftSpeedFactor *= -1
+        
+        if self.rightClosedLoop.getSetpoint() > 10000:
+            rightSpeedFactor = 1
+        elif self.rightClosedLoop.getSetpoint() < -10000:
+            rightSpeedFactor = 1
+        
+        if self.leftClosedLoop.getSetpoint() > 10000:
+            leftSpeedFactor = 1
+        elif self.leftClosedLoop.getSetpoint() < -10000:
+            leftSpeedFactor = 1
 
         #lógica para a simualção de movimento
         if self.rightClosedLoop.getSetpoint() > 0.0:
-            self.fictionalEncoderRight += 0.05
+            self.fictionalEncoderRight += 0.1 * rightSpeedFactor
             self.rightEncoder.setPosition(self.fictionalEncoderRight)
         elif self.rightClosedLoop.getSetpoint() < 0.0:
-            self.fictionalEncoderRight -= 0.05
+            self.fictionalEncoderRight -= 0.1 * rightSpeedFactor
             self.rightEncoder.setPosition(self.fictionalEncoderRight)
         
         if self.leftClosedLoop.getSetpoint() > 0.0:
-            self.fictionalEncoderLeft += 0.05
+            self.fictionalEncoderLeft += 0.1 * leftSpeedFactor
             self.leftEncoder.setPosition(self.fictionalEncoderLeft)
         elif self.leftClosedLoop.getSetpoint() < 0.0:
-            self.fictionalEncoderLeft -= 0.05
+            self.fictionalEncoderLeft -= 0.1 * leftSpeedFactor
             self.leftEncoder.setPosition(self.fictionalEncoderLeft)
 
         #lógica para a simulação da rotação
         rotateRight = (self.rightClosedLoop.getSetpoint() > self.leftClosedLoop.getSetpoint())
         rotateLeft = (self.leftClosedLoop.getSetpoint() > self.rightClosedLoop.getSetpoint())
-        self.simulateNavx(rotateRight, rotateLeft)
 
-    def simulateNavx(self, rotateRight: bool, rotateLeft: bool):
+        rightDIfference = self.rightClosedLoop.getSetpoint() - self.leftClosedLoop.getSetpoint()
+        leftDifference =  self.leftClosedLoop.getSetpoint() - self.rightClosedLoop.getSetpoint()
+
+        rightPercentage = rightDIfference / 10000
+        leftPercentage = leftDifference / 10000
+
+        if rightPercentage < 0:
+            rightPercentage *= -1
+        if leftPercentage < 0:
+            leftPercentage *= -1
+
+        if rightPercentage > 1:
+            rightPercentage = 1
+        elif rightPercentage < -1:
+            rightPercentage = 1
+
+        if leftPercentage > 1:
+            leftPercentage = 1
+        elif leftPercentage < -1:
+            leftPercentage = 1
+
+
+        self.simulateNavx(rotateRight, rotateLeft, leftPercentage, rightPercentage)
+
+
+
+    def simulateNavx(self, rotateRight: bool, rotateLeft: bool, leftPorcentage, rightPorcentage):
         if self.fictionalNavx < 0:
             self.fictionalNavx = 359.999
         elif self.fictionalNavx > 359.999:
             self.fictionalNavx = 0
         else:
             if rotateRight:
-                self.fictionalNavx += 1
+                self.fictionalNavx += 10 * rightPorcentage
             if rotateLeft:
-                self.fictionalNavx -= 1
+                self.fictionalNavx -= 10 * leftPorcentage
         self.rotation = Rotation2d.fromDegrees(self.fictionalNavx)
 
         

@@ -37,7 +37,7 @@ class MyRobot(wpilib.TimedRobot):
                                 dt = 0.02
 
                                 self.currentState = self.profile.calculate(dt, self.currentState, goal)
-
+                                
                                 self.motor1.set((self.currentState.position*self.max_motor_speed))
                                 self.motor2.set((self.currentState.position*self.max_motor_speed))
                         else:

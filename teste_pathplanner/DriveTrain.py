@@ -22,10 +22,10 @@ class DriveSubsystem(Subsystem):
     def __init__(self):
 
         #Configuração dos motores da tração *Necessário rever o id dos motores
-        self.motor1 = rev.SparkMax(51, rev.SparkLowLevel.MotorType.kBrushless)
-        self.motor2 = rev.SparkMax(52, rev.SparkLowLevel.MotorType.kBrushless)
-        self.motor3 = rev.SparkMax(53, rev.SparkLowLevel.MotorType.kBrushless)
-        self.motor4 = rev.SparkMax(54, rev.SparkLowLevel.MotorType.kBrushless)
+        self.motor1 = rev.SparkMax(50, rev.SparkMax.MotorType.kBrushless)
+        self.motor2 = rev.SparkMax(52, rev.SparkMax.MotorType.kBrushless)
+        self.motor3 = rev.SparkMax(54, rev.SparkMax.MotorType.kBrushless)
+        self.motor4 = rev.SparkMax(55, rev.SparkMax.MotorType.kBrushless)
 
         #Define o tamanho da correia, A circunferência da roda e a relação engrenagem
         self.kinematics = DifferentialDriveKinematics(inchesToMeters(25.78))
@@ -36,8 +36,12 @@ class DriveSubsystem(Subsystem):
         self.navx = AHRS.create_spi()
         self.navx.reset()
 
+    
+
         #Configuração do PID dos sparkmax
         config = rev.SparkMaxConfig()
+        config.smartCurrentLimit(40,50,5700)
+        #config.closedLoopRampRate(0.25)
         config.closedLoop.maxOutput(0.5)
         config.closedLoop.minOutput(-0.5)
         config.closedLoop.setFeedbackSensor(rev.FeedbackSensor.kPrimaryEncoder)
@@ -82,10 +86,10 @@ class DriveSubsystem(Subsystem):
         self.fictionalNavx = 0
         
         #Cria a rotação do robo
-        #self.rotation = Rotation2d.fromDegrees(self.navx.getAngle())
+        self.rotation = Rotation2d.fromDegrees(self.navx.getAngle())
 
         #Cria a rotação para simulação
-        self.rotation = Rotation2d.fromDegrees(self.fictionalNavx)
+        #self.rotation = Rotation2d.fromDegrees(self.fictionalNavx)
 
         #Cria a posição inicial do robo
         self.pose = Pose2d(2,7, self.rotation)
@@ -183,6 +187,7 @@ class DriveSubsystem(Subsystem):
             self.motor3.getEncoder().getPosition(),
         )
 
+        '''
         rightSpeedFactor = self.rightClosedLoop.getSetpoint() / 10000
         leftSpeedFactor = self.leftClosedLoop.getSetpoint() / 10000
 
@@ -243,7 +248,7 @@ class DriveSubsystem(Subsystem):
 
 
         self.simulateNavx(rotateRight, rotateLeft, leftPercentage, rightPercentage)
-
+        '''
 
 
     def simulateNavx(self, rotateRight: bool, rotateLeft: bool, leftPorcentage, rightPorcentage):
